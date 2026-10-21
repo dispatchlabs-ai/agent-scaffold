@@ -100,6 +100,7 @@ an error without a fallback. Run `npm run demo` for the credential-free example.
 | `--history` | Print the selected saved conversation without a model call |
 | `--demo --history` | Inspect the demo's saved conversation |
 | `--state-dir PATH` | Use a separate local state directory |
+| `--cwd PATH` | Work in a target repository (requires the local runner build) |
 | `--update-definitions` | Apply changed definitions/skills when saved work is idle |
 | `--credentials session` | Read a key privately for this process only |
 | `--credentials environment` | Explicitly use the provider's injected environment variable |
@@ -109,6 +110,9 @@ With no session option, chat resumes `main`. In interactive chat, `/new` starts 
 conversation, `/history` prints it and `/quit` closes the process. Ctrl-C suspends
 unfinished work, which resumes with the same definitions and state next time.
 The CLI streams response text and reports tool activity on stderr.
+
+For repository improvement with worker delegation, follow the
+[local foreman guide](foreman.md).
 
 The scripted demo only supports the included helper and sample input. Use live
 chat for arbitrary questions. Demo and live stores are separate by default.

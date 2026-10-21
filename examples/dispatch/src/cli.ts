@@ -1,4 +1,5 @@
-import { readFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { readFile, realpath } from "node:fs/promises";
 import { resolve } from "node:path";
 import { parseArgs } from "node:util";
 import { fileURLToPath } from "node:url";
@@ -14,13 +15,13 @@ try {
     skills: { type: "boolean" }, history: { type: "boolean" }, new: { type: "boolean" },
     session: { type: "string" }, prompt: { type: "string" }, "prompt-file": { type: "string" },
     "state-dir": { type: "string" }, "update-definitions": { type: "boolean" },
-    credentials: { type: "string" },
+    credentials: { type: "string" }, cwd: { type: "string" },
   } });
   if (values.credentials && !["session", "environment"].includes(values.credentials)) throw new Error("--credentials accepts session or environment.");
   if (positionals.length > 1) throw new Error("Supply one agent name. Use --prompt for a one-shot message.");
   const name = positionals[0] ?? "helper";
   if (values.help) {
-    console.log("Usage: npm run chat -- [agent] [--demo | --prompt TEXT | --prompt-file PATH]\nOptions: --list, --skills, --session NAME, --new, --history, --state-dir PATH, --update-definitions\nCredentials: npm run auth -- help; --credentials session or --credentials environment\nInteractive commands: /new, /history, /quit");
+    console.log("Usage: npm run chat -- [agent] [--demo | --prompt TEXT | --prompt-file PATH]\nOptions: --list, --skills, --cwd PATH, --session NAME, --new, --history, --state-dir PATH, --update-definitions\nCredentials: npm run auth -- help; --credentials session or --credentials environment\nInteractive commands: /new, /history, /quit");
   } else if (values.list) {
     for (const agent of await catalog(root)) console.log(`${agent.id}${agent.runnable ? "" : " (draft)"}`);
   } else {
@@ -29,6 +30,12 @@ try {
       for (const skill of agent.skillCatalog ?? []) console.log(`${skill.id}\t${skill.revision.slice(0, 12)}\t${skill.description}`);
     } else {
       if (values.prompt && values["prompt-file"]) throw new Error("Choose --prompt or --prompt-file.");
+      if ((values.cwd || name === "foreman" || name === "worker") && !("repositoryInstructions" in agent)) {
+        throw new Error("Repository work requires the updated local runner. Follow docs/foreman.md, then run npm run link-runner -- /path/to/dispatch.");
+      }
+      if ((name === "foreman" || name === "worker") && !values.cwd) throw new Error("Supply --cwd PATH for the repository to work on. See docs/foreman.md.");
+      const cwd = values.cwd ? await realpath(resolve(values.cwd)) : undefined;
+      const workspace = cwd ? createHash("sha256").update(cwd).digest("hex").slice(0, 16) : undefined;
       if (values.demo && (name !== "helper" || values.prompt || values["prompt-file"])) throw new Error("The scripted demo runs helper with assets/sample-changes.md. Omit --demo for your own prompts.");
       if (!values.demo && !values.history) {
         credentials = await userCredentials();
@@ -46,11 +53,12 @@ try {
       }
       const prompt = values.demo ? await readFile(resolve(root, "assets/sample-changes.md"), "utf8")
         : values["prompt-file"] ? await readFile(resolve(values["prompt-file"]), "utf8") : values.prompt;
-      await chatInTerminal({ root, models, agent: name, demo: values.demo,
-        stateRoot: resolve(values["state-dir"] ?? resolve(root, ".state", values.demo ? "demo" : "live")),
+      const options = { root, models, agent: name, demo: values.demo, cwd,
+        stateRoot: resolve(values["state-dir"] ?? resolve(root, ".state", values.demo ? "demo" : "live", ...(workspace ? [workspace] : []))),
         session: values.session, newChat: values.new, history: values.history, prompt,
         updateDefinitions: values["update-definitions"],
-      });
+      };
+      await chatInTerminal(options);
     }
   }
 } catch (error) {

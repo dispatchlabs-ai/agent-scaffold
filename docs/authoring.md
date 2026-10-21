@@ -8,6 +8,11 @@ The root example chooses no model, runtime, tool set or schedule. Add executable
 definitions and configuration only when you integrate your chosen runtime. Put
 company integration code in `src/`, and document how to run it in `docs/`.
 
+For repository improvement, adapt [the foreman](../agents/foreman/agent.md) and
+[worker](../agents/worker/agent.md) roles. Supply each agent with the applicable
+repository `AGENTS.md` and its own `agent.md`. The optional Dispatch example has
+a [local runnable prototype](../examples/dispatch/docs/foreman.md).
+
 ## Two skill scopes
 
 ```text

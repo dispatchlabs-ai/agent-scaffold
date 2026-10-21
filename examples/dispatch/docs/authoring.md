@@ -9,6 +9,12 @@ instructions and skills. Names use lowercase letters, digits and hyphens and
 start with a letter. Run `npm run chat -- <your-name>`. There is no registration
 wizard or generated runtime code to maintain.
 
+With the updated [local runner](foreman.md), every agent also receives applicable
+repository `AGENTS.md` instructions. `delegates: ["worker"]` makes the named role
+available through native foreground child conversations. Each child loads its
+own `agent.md` and the shared rules; assignments must supply their own context.
+Use `--update-definitions` while idle after changing roles or scaffold rules.
+
 ## Two skill scopes
 
 ```text
