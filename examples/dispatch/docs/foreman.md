@@ -13,6 +13,7 @@ does not include repository instruction loading or the `delegate` tool yet.
 In your Dispatch source checkout, build the runner from its Nix shell:
 
 ```sh
+nix develop --command npm ci
 nix develop --command npm run build --workspace @dispatch/runner
 ```
 
