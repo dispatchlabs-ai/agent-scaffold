@@ -18,6 +18,9 @@ definitions are unchanged; existing local `.env` files are left untouched.
 
 Observed during qualification:
 
+- Fresh public GitHub clones on macOS and Linux ARM64 installed the alpha.2
+  runner archive, passed type checking, ran the demo and reopened saved history.
+  Native credential setup/read/removal also passed with the downloaded package.
 - macOS ARM64: native save, restart/read, rotation, hidden pasted input and
   cancellation, helper use/failure and logout. Live Anthropic chat through a
   vault helper read both skills and resumed its conversation in a second process.
