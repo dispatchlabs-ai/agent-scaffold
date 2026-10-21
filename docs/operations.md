@@ -20,6 +20,13 @@ claiming it completed.
 
 ## Dependencies and upgrades
 
+Credential setup is separate from conversation state. Use
+[the credential guide](credentials.md) to inspect, rotate or remove a configured
+source. Upgrading from 0.1.0 stops automatic `.env` loading and implicit ambient
+API-key use. Existing `.env` files are left untouched; move keys to your chosen
+store and remove those local files yourself when no longer needed. Existing
+conversations and agent definitions are preserved.
+
 The runner is an integrity-pinned public GitHub release archive built from the
 Dispatch repository. It is a source-alpha snapshot; `@dispatch/runner` is not on
 the npm registry. The archive's tag and SHA-512 integrity are in `package-lock.json`.

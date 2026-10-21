@@ -14,7 +14,7 @@ Give an agent with shell and file access this prompt:
 > Follow https://github.com/dispatchlabs-ai/agent-scaffold/blob/main/docs/setup.md
 > to make my own copy and run the scripted example. Show me the result and the
 > company and agent skills it read. Then help me configure live chat with my own
-> provider key, keeping credentials out of Git.
+> provider key using the credential setup guide, keeping secrets outside the repository.
 
 This is an operational guide for your agent, not a setup wizard. Fresh-agent
 onboarding has not yet been independently qualified.
@@ -36,11 +36,16 @@ and template actually read. The demo uses scripted responses, makes no model
 requests and needs no credentials. Its conversations are saved separately from
 live chat.
 
-For live chat, copy `.env.example` to `.env`, fill in your Anthropic API key and run:
+For live chat, save your Anthropic API key through a hidden prompt in your OS
+credential store, then chat:
 
 ```sh
+npm run auth -- login anthropic
 npm run chat -- helper
 ```
+
+[Credential setup](docs/credentials.md) also supports an existing password manager,
+session-only input and explicit environment compatibility. No `.env` is loaded.
 
 Ask it to draft release notes from your changes, or use the supplied input:
 

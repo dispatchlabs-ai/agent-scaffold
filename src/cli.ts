@@ -1,26 +1,26 @@
 import { readFile } from "node:fs/promises";
-import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { parseArgs } from "node:util";
 import { fileURLToPath } from "node:url";
-import { catalog, chatInTerminal, loadAgent } from "@dispatch/runner";
-import { demoModels, liveModels } from "./models.ts";
+import { catalog, chatInTerminal, loadAgent, CredentialError, promptForSecret, type UserCredentials } from "@dispatch/runner";
+import { demoModels, liveModels, userCredentials } from "./models.ts";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
+let credentials: UserCredentials | undefined;
 
 try {
-  const envFile = resolve(root, ".env");
-  if (existsSync(envFile)) process.loadEnvFile(envFile);
   const { values, positionals } = parseArgs({ allowPositionals: true, options: {
     demo: { type: "boolean" }, help: { type: "boolean" }, list: { type: "boolean" },
     skills: { type: "boolean" }, history: { type: "boolean" }, new: { type: "boolean" },
     session: { type: "string" }, prompt: { type: "string" }, "prompt-file": { type: "string" },
     "state-dir": { type: "string" }, "update-definitions": { type: "boolean" },
+    credentials: { type: "string" },
   } });
+  if (values.credentials && !["session", "environment"].includes(values.credentials)) throw new Error("--credentials accepts session or environment.");
   if (positionals.length > 1) throw new Error("Supply one agent name. Use --prompt for a one-shot message.");
   const name = positionals[0] ?? "helper";
   if (values.help) {
-    console.log("Usage: npm run chat -- [agent] [--demo | --prompt TEXT | --prompt-file PATH]\nOptions: --list, --skills, --session NAME, --new, --history, --state-dir PATH, --update-definitions\nInteractive commands: /new, /history, /quit");
+    console.log("Usage: npm run chat -- [agent] [--demo | --prompt TEXT | --prompt-file PATH]\nOptions: --list, --skills, --session NAME, --new, --history, --state-dir PATH, --update-definitions\nCredentials: npm run auth -- help; --credentials session or --credentials environment\nInteractive commands: /new, /history, /quit");
   } else if (values.list) {
     for (const agent of await catalog(root)) console.log(`${agent.id}${agent.runnable ? "" : " (draft)"}`);
   } else {
@@ -30,10 +30,19 @@ try {
     } else {
       if (values.prompt && values["prompt-file"]) throw new Error("Choose --prompt or --prompt-file.");
       if (values.demo && (name !== "helper" || values.prompt || values["prompt-file"])) throw new Error("The scripted demo runs helper with assets/sample-changes.md. Omit --demo for your own prompts.");
-      const models = values.demo ? demoModels() : liveModels();
+      if (!values.demo && !values.history) {
+        credentials = await userCredentials();
+        if (values.credentials === "environment") credentials.useEnvironment(agent.model.provider);
+        else if (values.credentials === "session") credentials.useSession(agent.model.provider, await promptForSecret(`${agent.model.provider} API key (this session only)`));
+        else if ((await credentials.status(agent.model.provider))[0].source === "unconfigured") {
+          if (!process.stdin.isTTY) throw new Error("No credential source configured. Run npm run auth -- login " + agent.model.provider + ", configure a helper, or explicitly select --credentials environment. The demo needs no key.");
+          credentials.useSession(agent.model.provider, await promptForSecret(`${agent.model.provider} API key (this session only; use npm run auth for saved setup)`));
+        }
+      }
+      const models = values.demo ? demoModels() : liveModels(credentials);
       if (!values.demo && !values.history) {
         if (!models.getModel(agent.model.provider, agent.model.id)) throw new Error("Unknown model. Set a supported provider and model in agent.md; see docs/setup.md.");
-        if (!await models.getAuth(agent.model.provider)) throw new Error(`No credentials for ${agent.model.provider}. Add your provider API key to .env; see .env.example and docs/setup.md. Try npm run demo without credentials.`);
+        if (!await models.getAuth(agent.model.provider)) throw new Error(`No credentials for ${agent.model.provider}. Run npm run auth -- help; see docs/credentials.md. Try npm run demo without credentials.`);
       }
       const prompt = values.demo ? await readFile(resolve(root, "assets/sample-changes.md"), "utf8")
         : values["prompt-file"] ? await readFile(resolve(values["prompt-file"]), "utf8") : values.prompt;
@@ -45,6 +54,9 @@ try {
     }
   }
 } catch (error) {
-  console.error(error instanceof Error ? error.message : String(error));
-  process.exitCode = 1;
+  const safe = error instanceof Error && error.cause instanceof CredentialError ? error.cause : error;
+  console.error(safe instanceof Error ? safe.message : "The command failed.");
+  process.exitCode = safe instanceof CredentialError && safe.code === "CANCELLED" ? 130 : 1;
+} finally {
+  credentials?.clearSession();
 }

@@ -1,5 +1,37 @@
 # Changelog
 
+## Unreleased
+
+## 0.2.0 — source alpha, October 21, 2026
+
+- Replace automatic `.env` loading and implicit ambient API keys with explicit
+  credential setup: native OS storage, an existing vault helper, hidden
+  session-only input, or environment compatibility selected for that run.
+- Add source status, resolution checking and removal without displaying keys.
+  Keep private helper configuration outside the project and fail without a
+  plaintext fallback when a configured source is unavailable.
+- Filter raw chat-provider errors before they enter saved history, preserving
+  retry/context-limit categories and withholding errors that can echo keys.
+
+This changes credential setup from 0.1.0. Existing conversation state and agent
+definitions are unchanged; existing local `.env` files are left untouched.
+
+Observed during qualification:
+
+- macOS ARM64: native save, restart/read, rotation, hidden pasted input and
+  cancellation, helper use/failure and logout. Live Anthropic chat through a
+  vault helper read both skills and resumed its conversation in a second process.
+- Linux ARM64, Debian Bookworm: native save/read/logout with an unlocked GNOME
+  Keyring Secret Service; a missing D-Bus/store failed without a plaintext fallback.
+- An OpenAI rejection with a synthetic key retained only a safe error in durable
+  history; the synthetic key was absent from the local state files.
+- An independent source/security review found and resolved error-disclosure,
+  native-write rollback and provider-decorator compatibility issues.
+
+Windows, Linux AMD64, locked-store UI, crash recovery and successful OpenAI
+inference remain unverified. This is not a sandbox or a penetration-test claim.
+Native/profile writes cannot be made crash-atomic across the two stores.
+
 ## 0.1.0 — source alpha, October 21, 2026
 
 - Add a runnable release-note helper with company and agent-specific skills.

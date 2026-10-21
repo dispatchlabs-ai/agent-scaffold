@@ -27,16 +27,18 @@ Rerunning the demo adds another turn to its saved conversation.
 ## Connect your provider
 
 ```sh
-cp .env.example .env
+npm run auth -- login anthropic
 ```
 
-Edit `.env` locally and set `ANTHROPIC_API_KEY` to your own provider key. Never
-paste keys into agent instructions or commit `.env`. You can instead supply the
-environment variable through your shell or secret manager. Existing environment
-variables take precedence over `.env`.
+Enter your own API key at the hidden prompt. It is saved in your native OS
+credential store, outside the repository. No `.env` file is read or created.
+Use [credential setup](credentials.md) for existing vault helpers, session-only
+input, environment compatibility, Linux prerequisites and recovery. If native
+storage is unavailable, select one of those explicit alternatives.
 
 The helper selects `anthropic / claude-sonnet-4-6` in `agents/helper/agent.md`.
-`src/models.ts` also registers the Pi OpenAI provider, which reads `OPENAI_API_KEY`.
+`src/models.ts` also registers the Pi OpenAI provider. Configure its credential
+with `npm run auth -- login openai` or a helper.
 To use it, select an OpenAI model ID supported by the pinned Pi 1.3.0 catalog in
 `agent.md` and set a thinking level supported by that model. Provider access and
 billing are yours. Other providers can be registered in `src/models.ts` through
@@ -51,8 +53,9 @@ upgrade action is needed.” The helper reads both skills and their template bef
 drafting. Live prompts, loaded skill content and conversation history are sent to
 the provider you configure. Local history is stored under `.state/live/`.
 
-If credentials are missing, the command explains which provider needs a key and
-exits with status 1. Run `npm run demo` to use the credential-free example.
+With no configured source, interactive chat offers a hidden session-only prompt;
+noninteractive chat exits with setup guidance. A failed configured source returns
+an error without a fallback. Run `npm run demo` for the credential-free example.
 
 ## Commands
 
@@ -68,6 +71,8 @@ exits with status 1. Run `npm run demo` to use the credential-free example.
 | `--demo --history` | Inspect the demo's saved conversation |
 | `--state-dir PATH` | Use a separate local state directory |
 | `--update-definitions` | Apply changed definitions/skills when saved work is idle |
+| `--credentials session` | Read a key privately for this process only |
+| `--credentials environment` | Explicitly use the provider's injected environment variable |
 | `--help` | Show command usage |
 
 With no session option, chat resumes `main`. In interactive chat, `/new` starts a

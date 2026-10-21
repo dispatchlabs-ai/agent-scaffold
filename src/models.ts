@@ -2,11 +2,22 @@ import { createModels, type Models } from "@earendil-works/pi-ai/models";
 import { anthropicProvider } from "@earendil-works/pi-ai/providers/anthropic";
 import { openaiProvider } from "@earendil-works/pi-ai/providers/openai";
 import { fauxAssistantMessage, fauxProvider, fauxToolCall } from "@earendil-works/pi-ai/providers/faux";
+import { UserCredentials, withPrivateProviderErrors } from "@dispatch/runner";
+import { fileURLToPath } from "node:url";
 
-export function liveModels(): Models {
-  const models = createModels();
-  models.setProvider(anthropicProvider());
-  models.setProvider(openaiProvider());
+export function userCredentials(): Promise<UserCredentials> {
+  return UserCredentials.open({ root: fileURLToPath(new URL("../", import.meta.url)), providers: [
+    { id: "anthropic", origin: "https://api.anthropic.com", environmentVariable: "ANTHROPIC_API_KEY" },
+    { id: "openai", origin: "https://api.openai.com", environmentVariable: "OPENAI_API_KEY" },
+  ] });
+}
+
+export function liveModels(credentials?: UserCredentials): Models {
+  const models = createModels({ credentials: credentials?.store,
+    authContext: credentials?.authContext ?? { env: async () => undefined, fileExists: async () => false },
+  });
+  models.setProvider(withPrivateProviderErrors(anthropicProvider()));
+  models.setProvider(withPrivateProviderErrors(openaiProvider()));
   return models;
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "company-agents",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "A small, runnable company-agent scaffold with local terminal chat and scoped skills",
   "type": "module",
@@ -10,13 +10,14 @@
   },
   "scripts": {
     "chat": "node src/cli.ts",
+    "auth": "node src/auth.ts",
     "demo": "npm run chat -- helper --demo",
     "agents": "npm run chat -- --list",
     "skills": "npm run chat -- --skills",
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "@dispatch/runner": "https://github.com/dispatchlabs-ai/dispatch/releases/download/runner-v0.6.0-alpha.1/dispatch-runner-0.6.0.tgz",
+    "@dispatch/runner": "https://github.com/dispatchlabs-ai/dispatch/releases/download/runner-v0.6.0-alpha.2/dispatch-runner-0.6.0.tgz",
     "@earendil-works/pi-ai": "1.3.0"
   },
   "devDependencies": {
