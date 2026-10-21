@@ -95,8 +95,8 @@ provider key or delete a vault item. Revoke compromised keys at the provider.
 Source configuration lives under `$XDG_CONFIG_HOME/dispatch/credentials` (default
 `~/.config/dispatch/credentials`), or `%APPDATA%\Dispatch\credentials` on Windows.
 The directory/file must be private and owned by the user on POSIX systems. No
-plaintext key is saved there. A hash of the canonical repository path scopes the
-profile; copied or moved checkouts need their own setup. Provider-origin changes
+plaintext key is saved there. A hash of the canonical runtime directory scopes the
+profile; copied or moved examples need their own setup. Provider-origin changes
 also require explicit setup again. Preserve the configured source until a failed
 removal or replacement can be recovered.
 Ordinary profile-write failures roll back the native change. A crash between
