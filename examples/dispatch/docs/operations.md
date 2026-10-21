@@ -4,6 +4,14 @@
 
 `.state/live/` and `.state/demo/` hold separate native Pi SQLite sessions. They
 contain private conversation history and tool results and are ignored by Git.
+Before opening SQLite, the runner applies owner-only POSIX permissions (`0700`
+directories and `0600` database, existing sidecar and status files), including
+older state. It rejects unsafe ownership, symlinks, hard-linked files and special
+files, and stops if it cannot establish the required modes. Use state beneath
+trusted parent directories; review extra filesystem ACLs and backups separately.
+Native Windows storage is unavailable; use macOS, Linux or a Linux filesystem in
+WSL. Filesystem permissions do not isolate code running as the same user.
+
 Run only one process against an agent's state directory at a time; the runner
 enforces the database's single-owner contract. Independent state directories can
 run independently. No network listener is opened by the terminal client.
@@ -17,6 +25,11 @@ The `--session` option selects a conversation within that store. `/new` and
 `--new` print a new session key; keep it to reopen that conversation. The default
 `main` session remains available. Ctrl-C suspends pending work rather than
 claiming it completed.
+
+The terminal prints control characters as visible `\xNN` escapes, preserving
+tabs, newlines and ordinary Unicode. This applies to streamed/final answers,
+history, tool diagnostics and returned errors; the original stored text remains
+unchanged for other clients.
 
 ## Dependencies and upgrades
 

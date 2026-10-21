@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Update the optional Dispatch example to runner source snapshot alpha.3: secure
+  new and retained conversation state with owner-only POSIX modes before opening
+  SQLite, and display terminal controls as visible escapes in streamed answers,
+  history and errors. Stored text is unchanged. Native Windows state now fails
+  safely until ACL enforcement is available; use macOS, Linux or a Linux
+  filesystem in WSL.
+
 - Make the default template a runtime-independent directory structure with no
   package manifest, installation step or provider setup at the repository root.
 - Keep useful agent instructions, both skill scopes, supporting resources and a
@@ -13,6 +20,13 @@
 Checked relative documentation links and the root's absence of runtime files.
 The relocated example installed, type-checked, ran the demo and reopened its
 saved history on macOS ARM64 with Node 24.21.0.
+
+The security follow-up installed alpha.3 from its locked public archive on macOS
+ARM64 with Node 24.21.0 and passed type checking, the demo and saved-history
+reopening. A fresh Linux ARM64 example with Node 24.19.0 exercised the same packed
+bytes. Manual observations covered private modes for new and retained state and
+visible escaping of synthetic terminal controls. Live inference, Linux AMD64 and
+WSL runtime behavior were not requalified; native Windows state is unavailable.
 
 ## 0.2.0 — source alpha, October 21, 2026
 

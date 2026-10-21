@@ -1,7 +1,9 @@
 # Run the optional Dispatch example
 
-Use Node.js 24 or 25 and npm. `.node-version` selects the 24.x line for tools that
-read it. No database server, Docker, Slack account or gateway is needed.
+Use Node.js 24 or 25 and npm on macOS or Linux (including a Linux filesystem in
+WSL). `.node-version` selects the 24.x line for tools that read it. Native Windows
+storage is unavailable until the runner can enforce private ACLs. No database
+server, Docker, Slack account or gateway is needed.
 
 ## Make your copy
 
