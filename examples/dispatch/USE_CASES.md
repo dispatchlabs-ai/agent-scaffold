@@ -11,8 +11,9 @@
 - Discover company skills and the selected agent's own skills, read supporting
   text on demand and retain content revision evidence with tool results.
 - Upgrade the shared runtime as a locked public dependency without copying code.
-- With an updated local runner build, assign bounded repository improvements to
-  a foreman and workers that receive repository rules and their own instructions.
+- With an updated local runner build, keep a Foreman working continuously toward
+  a repository goal, delegate bounded assignments to workers, and recover or pause
+  the saved loop. Every role receives repository rules and its own instructions.
   See the [local prototype guide](docs/foreman.md).
 
 This scaffold intentionally contains no web app, checked-in vendor archives or

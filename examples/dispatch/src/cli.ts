@@ -16,12 +16,13 @@ try {
     session: { type: "string" }, prompt: { type: "string" }, "prompt-file": { type: "string" },
     "state-dir": { type: "string" }, "update-definitions": { type: "boolean" },
     credentials: { type: "string" }, cwd: { type: "string" },
+    once: { type: "boolean" }, continuous: { type: "boolean" },
   } });
   if (values.credentials && !["session", "environment"].includes(values.credentials)) throw new Error("--credentials accepts session or environment.");
   if (positionals.length > 1) throw new Error("Supply one agent name. Use --prompt for a one-shot message.");
   const name = positionals[0] ?? "helper";
   if (values.help) {
-    console.log("Usage: npm run chat -- [agent] [--demo | --prompt TEXT | --prompt-file PATH]\nOptions: --list, --skills, --cwd PATH, --session NAME, --new, --history, --state-dir PATH, --update-definitions\nCredentials: npm run auth -- help; --credentials session or --credentials environment\nInteractive commands: /new, /history, /quit");
+    console.log("Usage: npm run chat -- [agent] [--demo | --prompt TEXT | --prompt-file PATH]\nOptions: --list, --skills, --cwd PATH, --session NAME, --new, --history, --state-dir PATH, --update-definitions\nForeman continues by default. --once runs a single pass; --continuous follows a continuous agent's loop.\nCredentials: npm run auth -- help; --credentials session or --credentials environment\nInteractive commands: /new, /history, /quit");
   } else if (values.list) {
     for (const agent of await catalog(root)) console.log(`${agent.id}${agent.runnable ? "" : " (draft)"}`);
   } else {
@@ -30,6 +31,9 @@ try {
       for (const skill of agent.skillCatalog ?? []) console.log(`${skill.id}\t${skill.revision.slice(0, 12)}\t${skill.description}`);
     } else {
       if (values.prompt && values["prompt-file"]) throw new Error("Choose --prompt or --prompt-file.");
+      if (values.once && values.continuous) throw new Error("Choose --once or --continuous.");
+      const continuous = !values.history && !values.once && (values.continuous || name === "foreman");
+      if (continuous && agent.trigger.mode !== "continuous") throw new Error("Continuous work requires a continuous agent definition.");
       if ((values.cwd || name === "foreman" || name === "worker") && !("repositoryInstructions" in agent)) {
         throw new Error("Repository work requires the updated local runner. Follow docs/foreman.md, then run npm run link-runner -- /path/to/dispatch.");
       }
@@ -56,7 +60,7 @@ try {
       const options = { root, models, agent: name, demo: values.demo, cwd,
         stateRoot: resolve(values["state-dir"] ?? resolve(root, ".state", values.demo ? "demo" : "live", ...(workspace ? [workspace] : []))),
         session: values.session, newChat: values.new, history: values.history, prompt,
-        updateDefinitions: values["update-definitions"],
+        updateDefinitions: values["update-definitions"], continuous,
       };
       await chatInTerminal(options);
     }

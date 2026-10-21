@@ -70,8 +70,9 @@ Conversations persist locally. [Setup](docs/setup.md) covers providers and comma
 [authoring](docs/authoring.md) explains how to make this your own;
 [operations](docs/operations.md) covers recovery, upgrades and boundaries.
 
-The [local repository foreman](docs/foreman.md) adds adaptive repository work and
-bounded worker delegation. It currently requires an updated local runner build;
+The [local repository foreman](docs/foreman.md) adds continuous repository work and
+bounded worker delegation. Each completed pass leads to the next in the same saved
+conversation; use `--once` for an assessment. It requires an updated local runner build;
 the pinned public snapshot continues to support the helper workflow.
 
 ## What you own

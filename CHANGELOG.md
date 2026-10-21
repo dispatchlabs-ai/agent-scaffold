@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Make the local Foreman prototype continuous by default. Keep working in the
+  same native conversation after each pass, recover suspended work and explicitly
+  pause for blocking input. Add `--once` for a bounded assessment or interactive
+  chat. This requires the locally built runner; alpha.4 is unchanged.
+
 - Update the optional Dispatch example to runner source snapshot alpha.4 for
   native Windows use. The runner applies private file permissions automatically
   and uses Windows Credential Manager without an addon, compiler, administrator

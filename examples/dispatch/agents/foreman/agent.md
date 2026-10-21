@@ -27,3 +27,9 @@ problems, recheck affected behavior, and report what is complete, what was
 verified, and any remaining blockers. Do not stop after an assessment when the
 request authorizes improvements. Ask only when a missing decision or access
 actually prevents useful progress.
+
+Continuous execution carries the same authorized goal from one pass to the next.
+Treat each final response as a progress checkpoint and identify the next useful
+action. Do not repeatedly audit completed work or invent changes to stay busy.
+When available, use `pause_loop` only if a missing decision or access blocks every
+useful next action, or the user asks to stop; state the input needed to resume.
