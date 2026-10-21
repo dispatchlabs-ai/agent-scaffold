@@ -9,8 +9,13 @@ directories and `0600` database, existing sidecar and status files), including
 older state. It rejects unsafe ownership, symlinks, hard-linked files and special
 files, and stops if it cannot establish the required modes. Use state beneath
 trusted parent directories; review extra filesystem ACLs and backups separately.
-Native Windows storage is unavailable; use macOS, Linux or a Linux filesystem in
-WSL. Filesystem permissions do not isolate code running as the same user.
+On Windows, it automatically applies and verifies a private ACL for the current
+account, including inheritance for new SQLite sidecars and status files. It uses
+built-in Windows PowerShell; no administrator launch or manual permission
+commands are needed. State must be on a local Windows volume that supports ACLs
+(normally NTFS). Junctions, symbolic links and ambiguous trailing-dot/space path
+components are rejected. Filesystem permissions do not isolate code running as
+the same user or privileged administrators.
 
 Run only one process against an agent's state directory at a time; the runner
 enforces the database's single-owner contract. Independent state directories can

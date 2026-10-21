@@ -6,7 +6,8 @@ to the helper. Its agents, skills and assets are independent copies; edits to th
 root scaffold do not change this example. Run commands from this directory.
 
 Created by Chris Reynolds, cofounder of Dispatch Labs AI. MIT licensed, source
-alpha. Requires Node.js 24 or 25. Live chat needs your own model-provider API key.
+alpha. Runs on Windows, macOS and Linux with Node.js 24 or 25. Live chat needs
+your own model-provider API key.
 
 ## Use it with your AI agent
 
@@ -32,6 +33,13 @@ npm ci
 npm run demo
 ```
 
+In Windows PowerShell, use `npm.cmd`:
+
+```powershell
+npm.cmd ci
+npm.cmd run demo
+```
+
 You should see a short draft for **Field Notes 1.2**, followed by the two skills
 and template actually read. The demo uses scripted responses, makes no model
 requests and needs no credentials. Its conversations are saved separately from
@@ -44,6 +52,10 @@ credential store, then chat:
 npm run auth -- login anthropic
 npm run chat -- helper
 ```
+
+On Windows, these commands are `npm.cmd run auth -- login anthropic` and
+`npm.cmd run chat -- helper`. The application saves the key in Windows Credential
+Manager and protects its local files automatically.
 
 [Credential setup](docs/credentials.md) also supports an existing password manager,
 session-only input and explicit environment compatibility. No `.env` is loaded.

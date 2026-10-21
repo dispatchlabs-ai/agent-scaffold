@@ -1,9 +1,10 @@
 # Run the optional Dispatch example
 
-Use Node.js 24 or 25 and npm on macOS or Linux (including a Linux filesystem in
-WSL). `.node-version` selects the 24.x line for tools that read it. Native Windows
-storage is unavailable until the runner can enforce private ACLs. No database
-server, Docker, Slack account or gateway is needed.
+Use Node.js 24 or 25 and npm on Windows, macOS or Linux. `.node-version` selects
+the 24.x line for tools that read it. Windows runs directly in PowerShell under
+your normal account; the application handles private storage and Credential
+Manager setup automatically. No database server, Docker, Slack account or
+gateway is needed.
 
 ## Make your copy
 
@@ -12,7 +13,20 @@ https://github.com/dispatchlabs-ai/agent-scaffold. Pick the visibility appropria
 for your company, then clone your new repository. A template copy has its own
 history. A plain clone of this reference also works for a local trial.
 
-From the repository root, enter the example first:
+On Windows, download and extract the repository ZIP or clone your template copy.
+Open PowerShell in the repository folder, then run:
+
+```powershell
+cd examples\dispatch
+npm.cmd ci
+npm.cmd run demo
+```
+
+Use `npm.cmd` for the remaining commands in this guide on Windows. This spelling
+works with PowerShell's default script policy; you do not need to change it.
+Keep the copy in a local folder you own, such as your user directory.
+
+On macOS or Linux, enter the example from the repository root:
 
 ```sh
 cd examples/dispatch
@@ -32,6 +46,15 @@ assets, dependencies and state belong to this example, independently of the root
 scaffold.
 
 ## Connect your provider
+
+In Windows PowerShell:
+
+```powershell
+npm.cmd run auth -- login anthropic
+npm.cmd run chat -- helper
+```
+
+On macOS or Linux:
 
 ```sh
 npm run auth -- login anthropic

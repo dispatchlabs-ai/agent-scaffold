@@ -14,12 +14,16 @@ npm run auth -- login anthropic
 npm run chat -- helper
 ```
 
+In Windows PowerShell, use `npm.cmd` instead of `npm` in these commands.
+
 The first command reads the key without echoing it and saves it in macOS Keychain,
 Windows Credential Manager, or Linux Secret Service. Linux requires an available,
 unlocked Secret Service such as GNOME Keyring or KWallet and its D-Bus session.
-Unavailable native storage produces an error. There is no plaintext or kernel
-keyring fallback. The native adapter is optional; helper and session sources work
-without it.
+Windows uses its built-in Credential Manager APIs through Windows PowerShell;
+it requires no native addon, compiler, Visual C++ runtime installation or
+administrator launch. macOS and Linux use the optional native adapter. Helper
+and session sources work without that adapter. Unavailable native storage
+produces an error, with no plaintext or kernel keyring fallback.
 
 For scripted setup, a trusted password-manager command can pipe one key to
 `npm run auth -- login anthropic --stdin`. Never put the value in a command
@@ -38,6 +42,15 @@ This is a 1Password example, not a required subscription. Other vault CLIs can u
 the same interface. Authenticate the helper using its own supported login flow
 first. Use its actual absolute executable path. The executable must live outside
 the project. Arguments contain references, never secret values.
+
+On Windows, select the helper's `.exe` file, for example:
+
+```powershell
+npm.cmd run auth -- helper anthropic 'C:\Program Files\1Password CLI\op.exe' read 'op://Development/Anthropic/credential'
+```
+
+Replace the example path with the installed executable. Script launchers such as
+`.cmd`, `.bat` and `.ps1` are not executables; the runner does not start a shell.
 
 Setup verifies the helper, then stores its executable, arguments and approved
 provider origin in private user configuration. Helpers execute directly without
@@ -94,7 +107,8 @@ provider key or delete a vault item. Revoke compromised keys at the provider.
 
 Source configuration lives under `$XDG_CONFIG_HOME/dispatch/credentials` (default
 `~/.config/dispatch/credentials`), or `%APPDATA%\Dispatch\credentials` on Windows.
-The directory/file must be private and owned by the user on POSIX systems. No
+The directory/file must be private and owned by the user. Windows setup applies
+private ACLs automatically and checks them before loading a saved source. No
 plaintext key is saved there. A hash of the canonical runtime directory scopes the
 profile; copied or moved examples need their own setup. Provider-origin changes
 also require explicit setup again. Preserve the configured source until a failed

@@ -2,12 +2,15 @@
 
 ## Unreleased
 
+- Update the optional Dispatch example to runner source snapshot alpha.4 for
+  native Windows use. The runner applies private file permissions automatically
+  and uses Windows Credential Manager without an addon, compiler, administrator
+  launch or manual permission setup. Document the ordinary PowerShell workflow.
 - Update the optional Dispatch example to runner source snapshot alpha.3: secure
   new and retained conversation state with owner-only POSIX modes before opening
   SQLite, and display terminal controls as visible escapes in streamed answers,
-  history and errors. Stored text is unchanged. Native Windows state now fails
-  safely until ACL enforcement is available; use macOS, Linux or a Linux
-  filesystem in WSL.
+  history and errors. Stored text is unchanged. That snapshot rejected native
+  Windows state until ACL enforcement was added in alpha.4.
 
 - Make the default template a runtime-independent directory structure with no
   package manifest, installation step or provider setup at the repository root.
@@ -26,7 +29,17 @@ ARM64 with Node 24.21.0 and passed type checking, the demo and saved-history
 reopening. A fresh Linux ARM64 example with Node 24.19.0 exercised the same packed
 bytes. Manual observations covered private modes for new and retained state and
 visible escaping of synthetic terminal controls. Live inference, Linux AMD64 and
-WSL runtime behavior were not requalified; native Windows state is unavailable.
+WSL runtime behavior were not requalified in that security follow-up.
+
+The alpha.4 Windows qualification used Windows 11 x64, Windows PowerShell 5.1
+and Node 24.19.0. Installation without optional addons, type checking, the demo,
+both skill reads and saved-history reopening passed. Under a standard Windows
+account, synthetic native credentials passed save, read in another process,
+rotation and removal. Manual storage checks covered private ACLs, retained state,
+long paths and rejection of unsafe links and ambiguous paths. macOS ARM64 and
+Linux AMD64 also passed the example workflow. Live Windows inference, Windows 10,
+Windows ARM64, domain policies and interactive keyboard behavior were not
+qualified. These observations are not a penetration-test claim.
 
 ## 0.2.0 — source alpha, October 21, 2026
 
