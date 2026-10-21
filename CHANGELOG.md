@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+- Make the default template a runtime-independent directory structure with no
+  package manifest, installation step or provider setup at the repository root.
+- Keep useful agent instructions, both skill scopes, supporting resources and a
+  place for company code. The root Markdown examples use relative file links.
+- Move the complete runnable Dispatch implementation into `examples/dispatch/`,
+  including its dependencies, model configuration, CLI and runtime guides. It is
+  an explicit opt-in with independent definitions and local state.
+
+Checked relative documentation links and the root's absence of runtime files.
+The relocated example installed, type-checked, ran the demo and reopened its
+saved history on macOS ARM64 with Node 24.21.0.
+
 ## 0.2.0 — source alpha, October 21, 2026
 
 - Replace automatic `.env` loading and implicit ambient API keys with explicit

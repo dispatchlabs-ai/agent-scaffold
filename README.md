@@ -1,77 +1,87 @@
 # Agent Scaffold
 
-Make a company agent you can talk to in your terminal. This reference includes a
-release-note helper, a shared writing skill and a skill that belongs to the helper.
-Copy it, run it, then replace the examples with your own work.
+A directory structure for your company's agents, shared skills and supporting
+code. Copy it, adapt the Markdown examples and choose your own runtime when you
+need one. The default scaffold has no dependencies or installation step.
 
-Created by Chris Reynolds, cofounder of Dispatch Labs AI. MIT licensed, source
-alpha. Requires Node.js 24 or 25. Live chat needs your own model-provider API key.
+Created by Chris Reynolds, cofounder of Dispatch Labs AI. MIT licensed, source alpha.
 
 ## Use it with your AI agent
 
-Give an agent with shell and file access this prompt:
+Give an agent with file access this prompt, adding shell access if it will clone
+the repository:
 
 > Follow https://github.com/dispatchlabs-ai/agent-scaffold/blob/main/docs/setup.md
-> to make my own copy and run the scripted example. Show me the result and the
-> company and agent skills it read. Then help me configure live chat with my own
-> provider key using the credential setup guide, keeping secrets outside the repository.
+> to make my own copy of the directory structure. Walk me through the helper's
+> instructions and both skill scopes, then help me adapt them for my company.
+> Keep the setup structure-only unless I choose a runtime.
 
-This is an operational guide for your agent, not a setup wizard. Fresh-agent
+The guide uses ordinary files. Your existing agent supplies the ability to read
+them; this scaffold does not start an agent or provide model access. Fresh-agent
 onboarding has not yet been independently qualified.
 
-## Try it yourself
+## Make your copy
 
-Use GitHub's **Use this template** button to create your own repository, then clone
-it. To try the reference directly:
+Use GitHub's **Use this template** button, then clone your new repository. To
+explore the reference directly:
 
 ```sh
 git clone https://github.com/dispatchlabs-ai/agent-scaffold.git
 cd agent-scaffold
+```
+
+Start with [the helper instructions](agents/helper/agent.md), its linked skills
+and [the sample changes](assets/sample-changes.md). You can give those files to
+your existing agent to draft release notes, or replace them with your own work.
+No Node.js, npm, Dispatch account or provider credential is needed to adopt the
+structure.
+
+```text
+agents/
+  helper/
+    agent.md
+    skills/draft-release-notes/
+      SKILL.md
+      references/template.md
+skills/
+  company-writing-style/SKILL.md
+src/
+  README.md
+docs/
+assets/
+  sample-changes.md
+examples/
+  dispatch/                  # Optional runnable example
+```
+
+| Location | Purpose |
+| --- | --- |
+| `agents/` | One folder per agent, with instructions and its own skills |
+| `skills/` | Company guidance reusable across agents |
+| `src/` | A place for company code and integrations when you add them |
+| `docs/` | Setup, authoring and operating guidance |
+| `assets/` | Supporting inputs, templates and other resources |
+| `examples/dispatch/` | A self-contained, optional implementation of the layout |
+
+[Setup](docs/setup.md) explains the first steps. [Authoring](docs/authoring.md)
+covers customization, and [operations](docs/operations.md) covers updates.
+
+## Optional: run the Dispatch example
+
+If you want a ready-made terminal agent, [examples/dispatch](examples/dispatch/README.md)
+adds a pinned `@dispatch/runner` dependency, saved conversations and credential
+management. It requires Node.js 24 or 25:
+
+```sh
+cd examples/dispatch
 npm ci
 npm run demo
 ```
 
-You should see a short draft for **Field Notes 1.2**, followed by the two skills
-and template actually read. The demo uses scripted responses, makes no model
-requests and needs no credentials. Its conversations are saved separately from
-live chat.
-
-For live chat, save your Anthropic API key through a hidden prompt in your OS
-credential store, then chat:
-
-```sh
-npm run auth -- login anthropic
-npm run chat -- helper
-```
-
-[Credential setup](docs/credentials.md) also supports an existing password manager,
-session-only input and explicit environment compatibility. No `.env` is loaded.
-
-Ask it to draft release notes from your changes, or use the supplied input:
-
-```sh
-npm run chat -- helper --prompt-file assets/sample-changes.md
-```
-
-Conversations persist locally. [Setup](docs/setup.md) covers providers and commands;
-[authoring](docs/authoring.md) explains how to make this your own;
-[operations](docs/operations.md) covers recovery, upgrades and boundaries.
-
-## What you own
-
-| Location | Working example |
-| --- | --- |
-| `agents/` | Helper instructions, its runnable definition and release-note skill |
-| `skills/` | Company writing guidance available to agents that enable skills |
-| `src/` | CLI choices, direct model connections and the scripted demo |
-| `docs/` | Setup, authoring and operations guides |
-| `assets/` | Synthetic change list used by the demo and live example |
-| `factory.yaml` | Scheduled-agent selection; the manual example schedules nothing |
-
-The [Dispatch runner](https://github.com/dispatchlabs-ai/dispatch/tree/main/packages/runner)
-owns durable execution, skill loading and the terminal client. Its public archive
-is pinned in the dependency lockfile. There is no `vendor/`, web application or
-generator. Slack and a company inference gateway are optional integrations.
+The scripted demo needs no model credentials and makes no model requests.
+Live chat uses your own provider key. Dependencies are installed only in that
+example, whose definitions and state are independent of the root scaffold.
+You can omit `examples/` when copying only the structure.
 
 See [supported workflows](USE_CASES.md), [contributing](CONTRIBUTING.md) and the
 [license](LICENSE).

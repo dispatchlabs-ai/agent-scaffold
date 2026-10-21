@@ -115,4 +115,4 @@ execution, place that code in a real sandbox and keep authentication in a broker
 outside it. Restrict the broker's destinations and operations. This scaffold does
 not supply that sandbox or broker, and hiding a key does not prevent misuse of
 permitted API calls. See [operations](operations.md) for other boundaries and
-[the changelog](../CHANGELOG.md) for the platforms actually exercised.
+[the changelog](../../../CHANGELOG.md) for the platforms actually exercised.

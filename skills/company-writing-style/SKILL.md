@@ -12,5 +12,5 @@ words. Keep product claims tied to the facts supplied in the conversation.
 - Keep limitations visible. Never invent availability, dates or performance.
 - Preserve the names and version numbers the user supplied.
 
-This shared example applies to every agent that enables skills. Replace it with
+Share this guidance with any agent writing for your company. Replace it with
 your company's actual writing guidance.
