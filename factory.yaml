@@ -1,0 +1,2 @@
+# Agents to run on a schedule. Manual chat selects its agent on the command line.
+agents: []
