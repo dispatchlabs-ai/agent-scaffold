@@ -1,6 +1,6 @@
 # Run the optional Dispatch example
 
-Use Node.js 24 or 25 and npm on Windows, macOS or Linux. `.node-version` selects
+Use Node.js 24.22.1 or later in the Node 24 line and npm on Windows, macOS or Linux. `.node-version` selects
 the 24.x line for tools that read it. Windows runs directly in PowerShell under
 your normal account; the application handles private storage and Credential
 Manager setup automatically. No database server, Docker, Slack account or

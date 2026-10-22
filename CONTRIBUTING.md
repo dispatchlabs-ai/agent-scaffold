@@ -4,7 +4,7 @@ The default scaffold is Markdown and directories. Keep its setup free of runtime
 dependencies. For structure and documentation changes, follow the setup guide,
 check relative links and inspect the diff with `git diff --check`.
 
-For changes affecting the optional Dispatch example, use Node.js 24 or 25:
+For changes affecting the optional Dispatch example, use Node.js 24.22.1 or later in the Node 24 line:
 
 ```sh
 cd examples/dispatch

@@ -70,7 +70,7 @@ covers customization, and [operations](docs/operations.md) covers updates.
 
 If you want a ready-made terminal agent, [examples/dispatch](examples/dispatch/README.md)
 adds a pinned `@dispatch/runner` dependency, saved conversations and credential
-management. It requires Node.js 24 or 25:
+management. It requires Node.js 24.22.1 or later in the Node 24 line:
 
 ```sh
 cd examples/dispatch

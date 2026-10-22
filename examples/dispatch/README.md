@@ -6,7 +6,7 @@ to the helper. Its agents, skills and assets are independent copies; edits to th
 root scaffold do not change this example. Run commands from this directory.
 
 Created by Chris Reynolds, cofounder of Dispatch Labs AI. MIT licensed, source
-alpha. Runs on Windows, macOS and Linux with Node.js 24 or 25. Live chat needs
+alpha. Runs on Windows, macOS and Linux with Node.js 24.22.1 or later in the Node 24 line. Live chat needs
 your own model-provider API key.
 
 ## Use it with your AI agent
