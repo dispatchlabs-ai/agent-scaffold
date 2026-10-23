@@ -27,7 +27,7 @@ Run `npm run check` to type-check and load every runnable definition, validate
 folder names and target existence, and require discovered skills when enabled.
 Draft folders without `agent.ts` are reported and skipped. This loads trusted
 modules but starts no agents or model requests; it does not prove model or tool
-behavior. The public alpha.4 snapshot does not execute foreground delegation;
+behavior. Use the parent Runner alpha.5 installation for foreground delegation;
 use the local runner for repository roles even when definition checks pass.
 
 ## Two skill scopes

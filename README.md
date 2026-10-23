@@ -61,7 +61,7 @@ examples/
 | `src/` | A place for company code and integrations when you add them |
 | `docs/` | Setup, authoring and operating guidance |
 | `assets/` | Supporting inputs, templates and other resources |
-| `examples/dispatch/` | A self-contained, optional implementation of the layout |
+| `examples/dispatch/` | Optional definitions and integrations using an external runtime |
 
 [Setup](docs/setup.md) explains the first steps. [Authoring](docs/authoring.md)
 covers customization, and [operations](docs/operations.md) covers updates.
@@ -69,8 +69,8 @@ covers customization, and [operations](docs/operations.md) covers updates.
 ## Optional: run the Dispatch example
 
 If you want a ready-made terminal agent, [examples/dispatch](examples/dispatch/README.md)
-adds a pinned `@dispatch/runner` dependency, saved conversations and credential
-management. It requires Node.js 24.22.1 or later in the Node 24 line:
+uses the [parent runtime installation](examples/dispatch/docs/runtime-installation.md)
+for saved conversations and credential management. It requires Node.js 24.22.1 or later in the Node 24 line:
 
 ```sh
 cd examples/dispatch
@@ -79,8 +79,9 @@ npm run demo
 ```
 
 The scripted demo needs no model credentials and makes no model requests.
-Live chat uses your own provider key. Dependencies are installed only in that
-example, whose definitions and state are independent of the root scaffold.
+Live chat uses your own provider key. The parent workspace installs Runner/Pi;
+the example installs only development dependencies. Its definitions and state
+are independent of the root scaffold.
 You can omit `examples/` when copying only the structure.
 
 See [supported workflows](USE_CASES.md), [contributing](CONTRIBUTING.md) and the

@@ -1,6 +1,7 @@
 # Dispatch example
 
-An optional, self-contained runtime for the [structure-only scaffold](../../README.md).
+Optional runnable definitions for the [structure-only scaffold](../../README.md),
+using an externally installed Dispatch runtime.
 It includes a release-note helper, a shared writing skill and a skill that belongs
 to the helper. Its agents, skills and assets are independent copies; edits to the
 root scaffold do not change this example. Run commands from this directory.
@@ -20,6 +21,9 @@ Give an agent with shell and file access this prompt:
 
 This is an operational guide for your agent, not a setup wizard. Fresh-agent
 onboarding has not yet been independently qualified.
+
+Prepare the [parent runtime installation](docs/runtime-installation.md) before
+using the commands below. This repository does not install or pin Pi.
 
 ## Try it yourself
 
@@ -72,8 +76,8 @@ Conversations persist locally. [Setup](docs/setup.md) covers providers and comma
 
 The [local repository foreman](docs/foreman.md) adds continuous repository work and
 bounded worker delegation. Each completed pass leads to the next in the same saved
-conversation; use `--once` for an assessment. It requires an updated local runner build;
-the pinned public snapshot continues to support the helper workflow.
+conversation; use `--once` for an assessment. The parent installation supplies
+the Runner snapshot used by every role.
 
 ## What you own
 
@@ -87,9 +91,8 @@ the pinned public snapshot continues to support the helper workflow.
 | `factory.yaml` | Scheduled-agent selection; the manual example schedules nothing |
 
 The [Dispatch runner](https://github.com/dispatchlabs-ai/dispatch/tree/main/packages/runner)
-owns durable execution, skill loading and the terminal client. Its public archive
-is pinned in the dependency lockfile. There is no `vendor/`, web application or
-generator. Slack and a company inference gateway are optional integrations.
+owns durable execution, skill loading and the terminal client. The parent
+installation pins its archive; this checkout contains only company dependencies. Slack and a company inference gateway are optional integrations.
 
 See [supported workflows](USE_CASES.md), [contributing](../../CONTRIBUTING.md) and the
 [license](../../LICENSE).

@@ -6,6 +6,8 @@ your normal account; the application handles private storage and Credential
 Manager setup automatically. No database server, Docker, Slack account or
 gateway is needed.
 
+Prepare the [parent runtime installation](runtime-installation.md) first.
+
 ## Make your copy
 
 Choose **Use this template → Create a new repository** on
@@ -69,10 +71,10 @@ storage is unavailable, select one of those explicit alternatives.
 The helper selects `anthropic / claude-sonnet-4-6` in `agents/helper/agent.md`.
 `src/models.ts` also registers the Pi OpenAI provider. Configure its credential
 with `npm run auth -- login openai` or a helper.
-To use it, select an OpenAI model ID supported by the pinned Pi 1.3.0 catalog in
+To use it, select an OpenAI model ID supported by the installed Pi 1.4.0 catalog in
 `agent.md` and set a thinking level supported by that model. Provider access and
 billing are yours. Other providers can be registered in `src/models.ts` through
-[Pi's provider API](https://github.com/earendil-works/pi/tree/v1.3.0/packages/ai).
+[Pi's provider API](https://github.com/earendil-works/pi/tree/v1.4.0/packages/ai).
 
 ```sh
 npm run chat -- helper

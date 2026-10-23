@@ -1,5 +1,14 @@
 # Changelog
 
+## Runtime separation — October 23, 2026
+
+- Move Runner/Pi version selection to the parent installation. Definition packages
+  keep only company and development dependencies; the scaffold no longer offers
+  a helper that installs a private runtime into its example.
+- Verify definitions against Pi 1.4.0. Preserve earlier qualification receipts
+  below as evidence of the dependency layouts used at those dates.
+
+
 ## Unreleased
 
 - Add an optional manual lander role at the root and in the Dispatch example.

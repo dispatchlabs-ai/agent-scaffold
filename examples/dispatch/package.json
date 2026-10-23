@@ -15,13 +15,7 @@
     "agents": "npm run chat -- --list",
     "skills": "npm run chat -- --skills",
     "check": "tsc --noEmit && node src/check-definitions.ts",
-    "foreman": "node src/cli.ts foreman",
-    "link-runner": "node src/link-runner.ts"
-  },
-  "dependencies": {
-    "@dispatch/runner": "https://github.com/dispatchlabs-ai/dispatch/releases/download/runner-v0.6.0-alpha.4/dispatch-runner-0.6.0.tgz",
-    "@earendil-works/pi-ai": "1.3.0",
-    "@earendil-works/pi-durable": "1.3.0"
+    "foreman": "node src/cli.ts foreman"
   },
   "devDependencies": {
     "@types/node": "24.19.1",

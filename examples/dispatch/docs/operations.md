@@ -36,13 +36,9 @@ tabs, newlines and ordinary Unicode. This applies to streamed/final answers,
 history, tool diagnostics and returned errors; the original stored text remains
 unchanged for other clients.
 
-The locked public example pins `@earendil-works/pi-durable` exactly (`1.3.0`)
-to match runner alpha.4. The opt-in [local runner](foreman.md) installs matching
-Pi packages for that source build without changing the public pin; follow its
-state-upgrade precautions before opening retained work. When you copy or patch upstream source, record the upstream
-version and the condition that lets you delete the copy (for example, "drop
-when upstream exports X") beside it, and recheck each such note when you
-depend on a new runner snapshot.
+The parent installation uses Pi 1.4.0. Preserve a closed pre-upgrade backup
+before its schema-2 migration; older Pi cannot reopen a migrated store. Record
+upstream versions and removal conditions beside any copied implementations.
 
 ## Dependencies and upgrades
 
@@ -50,16 +46,10 @@ Credential setup is separate from conversation state. Use
 [the credential guide](credentials.md) to inspect, rotate or remove a configured
 source. The runtime does not load `.env` files or implicitly use ambient API keys.
 
-The runner is an integrity-pinned public GitHub release archive built from the
-Dispatch repository. It is a source-alpha snapshot; `@dispatch/runner` is not on
-the npm registry. The archive's tag and SHA-512 integrity are in `package-lock.json`.
-No local source checkout or `vendor/` folder is needed for `npm ci`.
-
-Update the archive URL in `package.json` to a reviewed immutable runner snapshot,
-run `npm install` to update the lockfile, and inspect both changes. Try the new
-snapshot with separate state before upgrading retained work.
-Keep Pi package versions compatible with that runner. Never overwrite a published
-archive under the same tag and filename.
+The installation owns the immutable Runner archive and its lockfile. Follow
+[runtime installation](runtime-installation.md) to update that parent workspace;
+`npm ci` in this definition checkout installs company dependencies only.
+Verify native compatibility and saved-state recovery before a live upgrade.
 
 A template copy owns its files. Changes to this reference do not automatically
 rewrite your company definitions. Compare later scaffold changes and adopt those

@@ -6,36 +6,19 @@ rules live in `AGENTS.md`; each role's instructions live in its own `agent.md`.
 Formal checks and review follow meaningful implementation packages. Completing a
 pass is a progress checkpoint, not an instruction to exit.
 
-This prototype needs the updated runner source. The pinned public alpha.4 archive
-does not include repository instruction loading or the `delegate` tool yet.
-
-## Install the local runner
-
-In your Dispatch source checkout, build the runner from its Nix shell:
-
-```sh
-nix develop --command npm ci
-nix develop --command npm run build --workspace @dispatch/runner
-```
-
-Then, from this scaffold's `examples/dispatch/` directory:
+Use the shared parent Runner installation described in
+[runtime installation](runtime-installation.md). Alpha.5 includes foreground
+delegation and repository instruction loading. From the example directory:
 
 ```sh
 npm ci
-npm run link-runner -- /path/to/dispatch
 npm run check
 ```
 
-`link-runner` installs a temporary package built from that checkout's `dist/`
-and matching Pi AI/Durable versions without changing the manifest or lockfile.
-Build again before reinstalling source changes. `npm ci` restores the public
-packages; repeat `link-runner` afterward to use the foreman.
-
-Current runner source uses Pi 1.4.0, while public alpha.4 uses 1.3.0. Use a separate
-`--state-dir .state/local-trial` for local trials. Before upgrading retained work,
-stop its owner and back up the complete state directory: Pi 1.4 automatically
-upgrades SQLite to schema version 2, which Pi 1.3 cannot reopen. `npm ci` does not
-undo that migration. Rolling back requires the pre-upgrade backup or fresh state.
+For source development, build and pack Runner in its owning Dispatch checkout,
+then install that archive in the parent workspace. Do not install a temporary
+runtime into this definition directory. Keep a separate state directory for
+trials and preserve a complete pre-upgrade backup before Pi 1.4 opens old state.
 
 Configure your OpenAI credential using the [credential guide](credentials.md).
 Each role selects its model in its own `agent.md`; change those definitions if needed.
