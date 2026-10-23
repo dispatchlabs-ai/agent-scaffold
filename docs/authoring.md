@@ -55,6 +55,31 @@ These files are selected by the operator. They are not automatically loaded as
 role instructions, skills, or a test runner. Adapt the examples to each agent's
 real work; use synthetic inputs for public examples.
 
+For independent capability measurement, keep preparation notes, expected results,
+reference answers, and earlier scored runs outside the executing agent's allowed
+reads and context. Supply only selected messages, normal instructions/skills, and
+task inputs. Verify this across file, retrieval, and delegated-tool access using
+restricted input staging or enforced permissions; this directory convention does
+not isolate files. If isolation cannot be enforced, record an **assisted
+rehearsal**, not an independent measurement, and disclose exposed evaluator data.
+
+Include typical, edge, and adversarial cases. The correction example's
+[retrieved-instruction variant](../agents/helper/test-prompts/correction-and-evidence.md#retrieved-instruction-variant)
+uses a harmless synthetic source comment to exercise that boundary. Choose checks
+before running: pass requires every selected check to be met; partial means useful
+work with required evidence missing; fail means a contradicted requirement,
+fabricated result, or unauthorized action attempt, even if a tool blocks it.
+Missing prerequisites are blocked/not run. Keep per-check evidence and excluded
+cases visible instead of averaging away failures.
+
+Before reliability claims or comparisons, repeat cases in fresh conversations
+with the same recorded model, instructions, runtime, tools, and input revisions.
+Reset mutable inputs and disable saved-response replay; retain all attempts. Keep
+held-out inputs and natural request variants, and rerun affected cases after
+changes. These practices adapt OpenAI's [evaluation guidance](https://developers.openai.com/api/docs/guides/evaluation-best-practices)
+and [harness-aware example](https://developers.openai.com/cookbook/examples/partners/harness_aware_plugin_evals/harness_aware_plugin_evals)
+without requiring a particular provider or evaluation runner.
+
 ## Definition contracts
 
 A role file is ordinary Markdown instructions; the structure itself declares no

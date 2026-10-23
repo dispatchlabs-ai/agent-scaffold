@@ -40,6 +40,10 @@ Select the prompt blocks manually, resolve inputs, and compare actual replies
 with their checks. The folder is not automatically loaded into the system prompt
 and supplies no new tools. Use a live conversation to assess model behavior;
 the scripted demo does not execute these prompts as an acceptance suite.
+Apply the root guide's [evaluation isolation and scoring guidance](../../../docs/authoring.md#test-prompts),
+including the separate retrieved-instruction variant. The operator supplies its
+source attachment as ordinary task data; the helper's read-only skill tools do
+not grant access to this prompt catalog or a publishing service.
 
 ## Two skill scopes
 
