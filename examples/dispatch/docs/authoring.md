@@ -30,6 +30,17 @@ modules but starts no agents or model requests; it does not prove model or tool
 behavior. Use the parent Runner alpha.5 installation for foreground delegation;
 use the local runner for repository roles even when definition checks pass.
 
+## Test prompts
+
+Keep manual exercises in `agents/<name>/test-prompts/` beside that agent's
+definition. The helper includes [release notes](../agents/helper/test-prompts/release-notes.md)
+and [correction/evidence](../agents/helper/test-prompts/correction-and-evidence.md)
+examples in this implementation's own copy.
+Select the prompt blocks manually, resolve inputs, and compare actual replies
+with their checks. The folder is not automatically loaded into the system prompt
+and supplies no new tools. Use a live conversation to assess model behavior;
+the scripted demo does not execute these prompts as an acceptance suite.
+
 ## Two skill scopes
 
 ```text

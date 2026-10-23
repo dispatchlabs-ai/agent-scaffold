@@ -8,6 +8,15 @@ The default structure has no process to start, packages to update or conversatio
 database. Once you add a runtime, document its dependencies, credential handling,
 state locations and recovery procedure in your copy.
 
+## Reusing test prompts
+
+After changing an agent's instructions, tools, model, or runtime, select the
+relevant files in its `test-prompts/` folder and rerun those conversations with
+resolved inputs. Compare actual results with the checks in each file and retain
+the revisions and evidence. Mark missing capability as blocked/not run; a plan
+does not establish that the requested action worked. The bundled helper prompts
+are documented examples, not a claim of fresh-model acceptance.
+
 ## Optional Dispatch example
 
 The example's commands run from `examples/dispatch/`. Its default conversations

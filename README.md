@@ -40,6 +40,9 @@ structure.
 agents/
   helper/
     agent.md
+    test-prompts/
+      release-notes.md
+      correction-and-evidence.md
     skills/draft-release-notes/
       SKILL.md
       references/template.md
@@ -56,7 +59,7 @@ examples/
 
 | Location | Purpose |
 | --- | --- |
-| `agents/` | One folder per agent, with instructions and its own skills |
+| `agents/` | One folder per agent, with instructions, its own skills, and reusable test prompts |
 | `skills/` | Company guidance reusable across agents |
 | `src/` | A place for company code and integrations when you add them |
 | `docs/` | Setup, authoring and operating guidance |
@@ -65,6 +68,9 @@ examples/
 
 [Setup](docs/setup.md) explains the first steps. [Authoring](docs/authoring.md)
 covers customization, and [operations](docs/operations.md) covers updates.
+Try the helper's [release-note prompt](agents/helper/test-prompts/release-notes.md)
+and [correction follow-up](agents/helper/test-prompts/correction-and-evidence.md)
+with your chosen agent; each includes its inputs and expected results.
 
 ## Optional: run the Dispatch example
 

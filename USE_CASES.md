@@ -4,6 +4,8 @@
   selecting a model provider or runtime.
 - Keep one agent's instructions and skills together, with reusable company skills
   in a separate shared directory.
+- Keep reusable test conversations and expected results beside each agent in
+  `test-prompts/`, and use them manually with the chosen runtime.
 - Adapt the supplied instructions, writing skill and release-note template with
   an existing file-reading agent or by editing the files yourself.
 - Keep verified findings in a shared notes file that roles read before

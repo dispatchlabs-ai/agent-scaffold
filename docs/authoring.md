@@ -34,6 +34,27 @@ links, or you can supply the files as context. The layout alone does not load
 skills automatically or restrict which files an agent can read. Discovery, tool
 permissions and saved history depend on the runtime you choose.
 
+## Test prompts
+
+Keep reusable conversations in `agents/<name>/test-prompts/`, beside the agent's
+definition. Use one descriptive Markdown file per workflow, without an extra
+README or nested scenario directory. The helper's
+[release-note exercise](../agents/helper/test-prompts/release-notes.md) and
+[correction exercise](../agents/helper/test-prompts/correction-and-evidence.md)
+show the convention.
+
+Include the source or realistic task, required inputs/capabilities, exact prompt
+and follow-up turns, and observable expected results. For real operations, name
+the permitted targets/effects, verification, recovery, and cleanup. Resolve any
+placeholders before sending; a prompt file does not grant access or approval.
+Retain the actual agent/source revisions, inputs, result, and evidence with the
+operator's run records. Keep secrets and private transcripts out of this public
+template. Do not mark an exercise passed merely because it was written.
+
+These files are selected by the operator. They are not automatically loaded as
+role instructions, skills, or a test runner. Adapt the examples to each agent's
+real work; use synthetic inputs for public examples.
+
 ## Definition contracts
 
 A role file is ordinary Markdown instructions; the structure itself declares no
