@@ -6,6 +6,10 @@
   in a separate shared directory.
 - Adapt the supplied instructions, writing skill and release-note template with
   an existing file-reading agent or by editing the files yourself.
+- Keep verified findings in a shared notes file that roles read before
+  assignments, independent of any conversation's history.
+- Route a finished repository change through an optional lander role that
+  verifies, reconciles and reports it before it merges.
 - Add company code and integrate a runtime of your choice when execution is needed.
 - Explicitly choose the [Dispatch example](examples/dispatch/README.md) for a
   scripted demo, direct terminal chat, local persistence and credential management.

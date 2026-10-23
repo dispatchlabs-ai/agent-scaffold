@@ -21,8 +21,12 @@ const temporary = await mkdtemp(join(tmpdir(), "scaffold-runner-"));
 try {
   const packed = execFileSync(process.execPath, [npm, "pack", runner, "--pack-destination", temporary, "--json"], { encoding: "utf8" });
   const [{ filename }] = JSON.parse(packed);
-  execFileSync(process.execPath, [npm, "install", "--no-save", "--package-lock=false", join(temporary, filename)], { cwd: root, stdio: "inherit" });
-  console.log("Local runner installed. npm ci restores the pinned public snapshot.");
+  // The example imports these directly; mixing them with the runner's versions
+  // creates incompatible native types and extension definitions.
+  const companions = ["@earendil-works/pi-ai", "@earendil-works/pi-durable"]
+    .map(name => `${name}@${manifest.dependencies[name]}`);
+  execFileSync(process.execPath, [npm, "install", "--no-save", "--package-lock=false", join(temporary, filename), ...companions], { cwd: root, stdio: "inherit" });
+  console.log("Local runner and matching Pi packages installed. npm ci restores the pinned public packages, not state. Use separate state for trials; see docs/foreman.md.");
 } finally {
   await rm(temporary, { recursive: true, force: true });
 }

@@ -2,6 +2,25 @@
 
 ## Unreleased
 
+- Add an optional manual lander role at the root and in the Dispatch example.
+  Reconcile completed work, run repository-approved checks and report deviations
+  before authorized integration. This is an instruction-driven role, not an
+  automatic Foreman handoff or security boundary.
+- Document runtime-owned definition contracts and shared dated findings; keep
+  Foreman work grounded in repository conventions.
+- Include definition loading, folder-name, target and skill checks in the
+  example's `npm run check`, compatible with public alpha.4 and local source.
+- Align the temporary local runner's Pi AI/Durable packages with its manifest.
+  Keep the public alpha.4/1.3.0 lock unchanged; document the irreversible SQLite
+  schema upgrade when trying Pi 1.4.0 and the need for separate state or backups.
+
+October 23 qualification on macOS ARM64 with Node 24.22.1: the locked alpha.4
+example and the locally packed Pi 1.4 runner passed type/definition checks and
+the scripted demo. Existing synthetic alpha.4 history reopened after migration.
+A scheduled demo task slept, survived close/reopen, completed its due pass and
+slept again with the same task identity. No live model calls or lander-driven
+merges were exercised; Windows and Linux were not requalified in this pass.
+
 - Make the local Foreman prototype continuous by default. Keep working in the
   same native conversation after each pass, recover suspended work and explicitly
   pause for blocking input. Add `--once` for a bounded assessment or interactive

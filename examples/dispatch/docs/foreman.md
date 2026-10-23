@@ -27,12 +27,18 @@ npm run check
 ```
 
 `link-runner` installs a temporary package built from that checkout's `dist/`
-without changing the manifest or lockfile. Build again before reinstalling source
-changes. `npm ci` restores the public snapshot; repeat `link-runner` afterward to
-use the foreman.
+and matching Pi AI/Durable versions without changing the manifest or lockfile.
+Build again before reinstalling source changes. `npm ci` restores the public
+packages; repeat `link-runner` afterward to use the foreman.
+
+Current runner source uses Pi 1.4.0, while public alpha.4 uses 1.3.0. Use a separate
+`--state-dir .state/local-trial` for local trials. Before upgrading retained work,
+stop its owner and back up the complete state directory: Pi 1.4 automatically
+upgrades SQLite to schema version 2, which Pi 1.3 cannot reopen. `npm ci` does not
+undo that migration. Rolling back requires the pre-upgrade backup or fresh state.
 
 Configure your OpenAI credential using the [credential guide](credentials.md).
-Both roles select the model in their own `agent.md`; change both if needed.
+Each role selects its model in its own `agent.md`; change those definitions if needed.
 
 ## Start continuous work
 
@@ -77,6 +83,24 @@ work; reopen with the same definitions and working directory to resume. The
 loop retains its task and submission identities across suspension. Stopping the
 process does not erase work or imply that the repository meets the goal. The
 prototype has no separate automated acceptance gate.
+
+## Land a finished change through its checks
+
+Repositories with formal checks can add the lander role, included here as
+`agents/lander/agent.md` in the scaffold and `agents/lander/` in this example. A
+lander assignment hands it a completed branch or change; it runs the checks
+on the result reconciled with the latest target branch, reports how the result
+diverges from the request, and merges only what is verified and in scope.
+
+```sh
+npm run chat -- lander --cwd /path/to/project --prompt "Land branch preview into main: reconcile with the latest main, run the repository's checks and merge it. Do not publish a release."
+```
+
+The lander is an ordinary manual agent with the same coding tools and
+permissions as the other roles, not an enforced approval or security boundary.
+Start it separately after implementation; the Foreman delegates to workers, not
+automatically to the lander. Its assignment must identify the completed branch,
+target branch and authorized publication scope.
 
 These roles have Pi's file and shell tools under your local account. `--cwd` sets
 their starting directory; it is not a filesystem sandbox. Use a task worktree for

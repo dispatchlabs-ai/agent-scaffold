@@ -14,7 +14,7 @@
     "demo": "npm run chat -- helper --demo",
     "agents": "npm run chat -- --list",
     "skills": "npm run chat -- --skills",
-    "check": "tsc --noEmit",
+    "check": "tsc --noEmit && node src/check-definitions.ts",
     "foreman": "node src/cli.ts foreman",
     "link-runner": "node src/link-runner.ts"
   },

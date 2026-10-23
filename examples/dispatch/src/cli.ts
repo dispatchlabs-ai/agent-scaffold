@@ -34,10 +34,10 @@ try {
       if (values.once && values.continuous) throw new Error("Choose --once or --continuous.");
       const continuous = !values.history && !values.once && (values.continuous || name === "foreman");
       if (continuous && agent.trigger.mode !== "continuous") throw new Error("Continuous work requires a continuous agent definition.");
-      if ((values.cwd || name === "foreman" || name === "worker") && !("repositoryInstructions" in agent)) {
+      if ((values.cwd || ["foreman", "worker", "lander"].includes(name)) && !("repositoryInstructions" in agent)) {
         throw new Error("Repository work requires the updated local runner. Follow docs/foreman.md, then run npm run link-runner -- /path/to/dispatch.");
       }
-      if ((name === "foreman" || name === "worker") && !values.cwd) throw new Error("Supply --cwd PATH for the repository to work on. See docs/foreman.md.");
+      if (["foreman", "worker", "lander"].includes(name) && !values.cwd) throw new Error("Supply --cwd PATH for the repository to work on. See docs/foreman.md.");
       const cwd = values.cwd ? await realpath(resolve(values.cwd)) : undefined;
       const workspace = cwd ? createHash("sha256").update(cwd).digest("hex").slice(0, 16) : undefined;
       if (values.demo && (name !== "helper" || values.prompt || values["prompt-file"])) throw new Error("The scripted demo runs helper with assets/sample-changes.md. Omit --demo for your own prompts.");

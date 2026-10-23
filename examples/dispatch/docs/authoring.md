@@ -15,6 +15,21 @@ available through native foreground child conversations. Each child loads its
 own `agent.md` and the shared rules; assignments must supply their own context.
 Use `--update-definitions` while idle after changing roles or scaffold rules.
 
+`agent.ts` may declare the trigger (`manual`; `continuous` with `delayMs`; or
+`interval` with `everyMs`), the iteration `input`, native `extensions`, a
+`coding` checkout, scoped `skills`, `delegates` naming other roles and a
+`handoff` target. Which fields exist is this implementation's choice, not a
+requirement of the directory structure. Only documented fields have runtime
+meaning; TypeScript also checks object literals passed to `defineAgent`. Extra
+frontmatter keys are not a substitute for fields in `agent.ts`.
+
+Run `npm run check` to type-check and load every runnable definition, validate
+folder names and target existence, and require discovered skills when enabled.
+Draft folders without `agent.ts` are reported and skipped. This loads trusted
+modules but starts no agents or model requests; it does not prove model or tool
+behavior. The public alpha.4 snapshot does not execute foreground delegation;
+use the local runner for repository roles even when definition checks pass.
+
 ## Two skill scopes
 
 ```text

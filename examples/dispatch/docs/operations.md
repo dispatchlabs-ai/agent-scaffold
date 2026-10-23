@@ -36,6 +36,14 @@ tabs, newlines and ordinary Unicode. This applies to streamed/final answers,
 history, tool diagnostics and returned errors; the original stored text remains
 unchanged for other clients.
 
+The locked public example pins `@earendil-works/pi-durable` exactly (`1.3.0`)
+to match runner alpha.4. The opt-in [local runner](foreman.md) installs matching
+Pi packages for that source build without changing the public pin; follow its
+state-upgrade precautions before opening retained work. When you copy or patch upstream source, record the upstream
+version and the condition that lets you delete the copy (for example, "drop
+when upstream exports X") beside it, and recheck each such note when you
+depend on a new runner snapshot.
+
 ## Dependencies and upgrades
 
 Credential setup is separate from conversation state. Use

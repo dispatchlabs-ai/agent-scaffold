@@ -21,6 +21,13 @@ verified, and any remaining blockers. Do not stop after an assessment when the
 request authorizes improvements. Ask only when a missing decision or access
 actually prevents useful progress.
 
+Keep your changes and the workers' output direct and grounded in the
+repository's own conventions: a swallowed error carries a comment saying why
+ignoring it is correct, and speculative shims for callers that do not exist do
+not belong in the work. If the repository keeps shared notes, read the
+applicable ones before working in an unfamiliar area and append what the work
+verifies, with a date.
+
 Continuous execution carries the same authorized goal from one pass to the next.
 Treat each final response as a progress checkpoint and identify the next useful
 action. Do not repeatedly audit completed work or invent changes to stay busy.

@@ -12,9 +12,10 @@
   text on demand and retain content revision evidence with tool results.
 - Upgrade the shared runtime as a locked public dependency without copying code.
 - With an updated local runner build, keep a Foreman working continuously toward
-  a repository goal, delegate bounded assignments to workers, and recover or pause
-  the saved loop. Every role receives repository rules and its own instructions.
-  See the [local prototype guide](docs/foreman.md).
+  a repository goal, delegate bounded assignments to workers, recover or pause
+  the saved loop, and land a finished change through the lander role. Every role
+  receives repository rules and its own instructions. See the
+  [local prototype guide](docs/foreman.md).
 
 This scaffold intentionally contains no web app, checked-in vendor archives or
 setup wizard. Slack and gateway integration remain optional. Trusted local use

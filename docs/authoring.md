@@ -9,9 +9,12 @@ definitions and configuration only when you integrate your chosen runtime. Put
 company integration code in `src/`, and document how to run it in `docs/`.
 
 For repository improvement, adapt [the foreman](../agents/foreman/agent.md) and
-[worker](../agents/worker/agent.md) roles. Supply each agent with the applicable
-repository `AGENTS.md` and its own `agent.md`. The optional Dispatch example has
-a [local runnable prototype](../examples/dispatch/docs/foreman.md).
+[worker](../agents/worker/agent.md) roles, and add the optional
+[lander](../agents/lander/agent.md) as the final gate for repositories with
+formal checks: it verifies, reconciles and reports a finished change before it
+merges. Supply each agent with the applicable repository `AGENTS.md` and its
+own `agent.md`. The optional Dispatch example has a
+[local runnable prototype](../examples/dispatch/docs/foreman.md).
 
 ## Two skill scopes
 
@@ -30,6 +33,27 @@ The sample helper links to both scopes. An agent with file access can follow tho
 links, or you can supply the files as context. The layout alone does not load
 skills automatically or restrict which files an agent can read. Discovery, tool
 permissions and saved history depend on the runtime you choose.
+
+## Definition contracts
+
+A role file is ordinary Markdown instructions; the structure itself declares no
+schema. A runtime may pair each role with a machine-readable declaration —
+frontmatter or a sidecar module naming the model, tools, skills or schedule —
+and defines its own fields and validation rules. Unknown-field handling belongs
+to that runtime; the directory structure imposes none. The optional Dispatch
+example shows one such pairing.
+
+## Shared findings
+
+Supply role instructions and shared rules when starting each conversation;
+automatic loading depends on the runtime. Past findings are not automatically
+shared with other roles or conversations. Keep durable
+findings in a plain shared file — `NOTES.md` at the repository root for
+project-wide facts, or beside an agent's `agent.md` for its own. Read
+applicable notes before starting an assignment and append what the work
+verifies, with a date, keeping open questions separate from established
+findings. This is an ordinary file convention that any file-reading runtime
+can follow without support.
 
 Keep credentials out of instructions, skills and assets. Review what your runtime
 will send to a model provider before including company information.
