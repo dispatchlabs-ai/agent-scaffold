@@ -19,19 +19,10 @@ for (const entry of entries) {
   }
   try {
     const agent = await loadAgent(root, entry.id);
-    // alpha.4 retains but does not type/check delegates. Remove this compatibility
-    // check when the pinned public runner supports foreground delegation.
-    const delegates = "delegates" in agent ? agent.delegates : undefined;
-    if (delegates !== undefined && (!Array.isArray(delegates)
-      || delegates.some(target => typeof target !== "string" || !agentName.test(target))
-      || new Set(delegates).size !== delegates.length)) {
-      problems.push(`${entry.id}: delegates must be unique agent names`);
-    } else {
-      const targets = [...(delegates ?? []), ...(agent.handoff ? [agent.handoff.target] : [])];
-      for (const target of targets) {
-        if (!entries.some(candidate => candidate.runnable && candidate.id === target))
-          problems.push(`${entry.id}: ${target} is not a runnable agent`);
-      }
+    const targets = [...(agent.delegates ?? []), ...(agent.handoff ? [agent.handoff.target] : [])];
+    for (const target of targets) {
+      if (!entries.some(candidate => candidate.runnable && candidate.id === target))
+        problems.push(`${entry.id}: ${target} is not a runnable agent`);
     }
     if (agent.skills && !agent.skillCatalog?.length)
       problems.push(`${entry.id}: enables skill discovery but no skills resolve`);

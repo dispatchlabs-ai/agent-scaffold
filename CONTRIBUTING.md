@@ -4,7 +4,8 @@ The default scaffold is Markdown and directories. Keep its setup free of runtime
 dependencies. For structure and documentation changes, follow the setup guide,
 check relative links and inspect the diff with `git diff --check`.
 
-For changes affecting the optional Dispatch example, use Node.js 24.22.1 or later in the Node 24 line:
+For changes affecting the optional Dispatch example, use Node.js 24.22.1 or later in the Node 24 line. First install the shared runtime above this checkout using
+[the installation guide](examples/dispatch/docs/runtime-installation.md), then:
 
 ```sh
 cd examples/dispatch
