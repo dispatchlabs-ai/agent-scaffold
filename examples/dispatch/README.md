@@ -89,6 +89,13 @@ conversations and native recovery; neither is a child of the other.
 The [installation guide](docs/runtime-installation.md) pins source with messaging
 support; the older alpha.5 archive does not include it.
 
+## Agent-local schedules — design only
+
+The [daily 3 a.m. Eastern example](docs/schedules.md) shows schedules and prompts
+inside their owning agent's definition, with Runner providing shared execution.
+The proposed `schedules` field and cron/timezone support are **not implemented**.
+The checked-in definitions and `factory.yaml` are unchanged; no timer is enabled.
+
 ## What you own
 
 | Location | Working example |

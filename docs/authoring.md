@@ -40,6 +40,22 @@ scripted demonstration and live commands. It contrasts peer messages with
 private child delegation; neither the directory layout nor this guide implements
 messaging for other runtimes.
 
+## Agent-local schedules
+
+Keep schedule definitions and their assignment prompts with the agent that owns
+the work, not in a growing company-wide list. One agent can have several schedules
+for different times, prompts or target repositories without duplicating the role.
+The selected runtime owns timing, admission, persistence and recovery; the agent
+owns its work and handoffs. A schedule submits an assignment rather than
+supervising an entire workflow.
+
+The optional Dispatch [daily 3 a.m. Eastern example](../examples/dispatch/docs/schedules.md)
+shows a proposed `schedules` list in `agent.ts`, with an adjacent imported
+`schedules.ts` if it grows. Company configuration selects enabled agents instead
+of containing their prompts and timetables. **This is an accepted design, not
+implemented cron support.** The root scaffold remains runtime-neutral and
+provides no scheduler.
+
 ## Two skill scopes
 
 ```text

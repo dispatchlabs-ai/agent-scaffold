@@ -1,5 +1,23 @@
 # Changelog
 
+## Agent-local schedule design — October 26, 2026
+
+- Document agent-owned schedules and predefined prompts, with optional adjacent
+  TypeScript modules when a list grows. Keep company configuration for agent
+  enablement and shared timing/admission in Runner.
+- Add a clearly non-runnable daily 3 a.m. Eastern author/reviewer example, linked
+  from both READMEs and authoring guides. Keep cron execution unchecked in the
+  use-case catalog and distinguish fresh occurrences from recovery.
+- Leave executable definitions, dependency pins and `factory.yaml` unchanged.
+  Cron/timezone support and the proposed `schedules` API are not implemented.
+  Existing-instance, missed-run, overlap and schedule-edit policies remain open.
+
+Checked affected documentation links and the docs-only diff. On macOS ARM64 with
+Node 24.22.1, a temporary example copy using the compatible parent runtime passed
+dependency installation, type/definition checks, both scripted demos and history
+reads. The illustrative definition was separately confirmed to fail TypeScript
+on the unsupported `schedules` field; this does not qualify cron execution.
+
 ## Independent-agent starter — October 26, 2026
 
 - Make independent-agent sequences discoverable from the root README and

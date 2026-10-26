@@ -51,6 +51,19 @@ configuration field also belongs to the private-child helper; it is not the
 independent message pattern. The existing Foreman example remains a separate
 option, not a required coordinator for peer sequences.
 
+## Agent-local schedules — design only
+
+Put calendar schedules and their prompts in the owning agent's `agent.ts`, not
+in `factory.yaml`. If the list grows, import an adjacent `schedules.ts`. The
+[daily 3 a.m. Eastern example](schedules.md) shows the proposed definition and
+how it would submit work to the existing independent author/reviewer sequence.
+`factory.yaml` selects enabled agents; Runner would interpret their schedules.
+
+This is accepted ownership guidance, not a supported field in today's runtime.
+The `schedules` API and cron/timezone execution remain unimplemented. Do not
+copy the illustrative field into a runnable definition or suppress its type
+error; use the current triggers above until support is implemented.
+
 ## Test prompts
 
 Keep manual exercises in `agents/<name>/test-prompts/` beside that agent's

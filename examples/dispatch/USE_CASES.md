@@ -25,6 +25,13 @@ recorded implementation evidence, with platform and historical limits in the
 
 UC-D010's entrypoint is implemented; live-model acceptance remains unqualified.
 
+## 4. Schedule assignments — accepted design, not implemented
+
+- [ ] **UC-D011:** Define schedules and predefined prompts with their owning agent, and run a daily assignment at a chosen local time and timezone through shared Runner scheduling.
+
+The [agent-local schedule example](docs/schedules.md) documents the proposed API;
+there is no cron implementation or scheduled-run qualification yet.
+
 This scaffold intentionally contains no web app, checked-in vendor archives or
 setup wizard. Slack and gateway integration remain optional. Trusted local use
 does not establish hosted, multi-tenant or portable shell sandbox support.

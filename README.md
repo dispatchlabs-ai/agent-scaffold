@@ -81,6 +81,14 @@ It shows one instance continuing its own work, handing off to an independent
 reviewer, and receiving the review. The scripted demonstration needs no API key;
 live execution uses your configured provider. The root scaffold stays runtime-free.
 
+## Schedule an agent
+
+Keep schedules and assignment prompts with their owning agent. Read
+[the ownership pattern](docs/authoring.md#agent-local-schedules) and
+[the daily 3 a.m. Eastern example](examples/dispatch/docs/schedules.md).
+This is a documented design, **not implemented cron support**; the working
+manual and continuous examples are unchanged.
+
 ## Optional: run the Dispatch example
 
 If you want a ready-made terminal agent, [examples/dispatch](examples/dispatch/README.md)
