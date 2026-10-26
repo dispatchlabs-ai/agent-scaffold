@@ -86,8 +86,11 @@ provides no scheduler.
 ## Email as another channel
 
 Expose existing roles through a dedicated mailbox and per-agent aliases instead
-of duplicating their definitions. Keep mailbox bindings in private installation
-configuration, delivery in an adapter and conversation state in the runtime.
+of duplicating their definitions. Declare each assigned email address in its
+owning agent's definition; omit it for agents without email. The helper shows
+a synthetic optional `Email` line. Keep shared mailbox connections and credentials
+in private installation configuration, delivery in an adapter and conversation
+state in the runtime.
 The [email pattern](email.md) covers complete filing, thread continuity,
 authorization, reply identity and recovery. It is a design guide, not an
 implemented email adapter or an invitation to mirror private conversations.

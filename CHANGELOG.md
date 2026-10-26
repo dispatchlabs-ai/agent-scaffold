@@ -4,7 +4,9 @@
 
 - Document a dedicated team mailbox with per-agent aliases, complete filing and
   explicit routing to existing definitions and durable conversations.
-- Separate mail delivery from role behavior and private installation bindings.
+- Keep each optional email address with its agent definition; demonstrate a
+  synthetic address in the root helper without adding an executable schema field.
+- Separate mail delivery from role behavior and private mailbox connections.
   Cover thread continuity, sender/recipient authorization, reply identity,
   duplicate handling, uncertain sends and loop prevention.
 - Use synthetic addresses only. Link the guide from onboarding, authoring,

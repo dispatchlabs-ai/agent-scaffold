@@ -101,7 +101,8 @@ manual and continuous examples are unchanged.
 ## Expose an agent through email
 
 Use [one team mailbox with per-agent aliases](docs/email.md), automatic filing
-and explicit thread routing to existing agent definitions. Email is a channel,
+and explicit thread routing to existing agent definitions. Each agent with an
+address declares it in its own definition. Email is a channel,
 not a second copy of the role or a mirror of every conversation.
 This is an integration guide with synthetic examples, **not a bundled email
 adapter**.

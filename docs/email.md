@@ -25,11 +25,42 @@ mailboxes or enforced access boundaries when they must not see one another's
 mail. Confirm the provider's mailbox, alias and sender-identity requirements;
 do not assume a group, forwarding address and sign-in mailbox are interchangeable.
 
-Keep the public template generic. Put real mailbox identities, alias bindings,
-allowed correspondents and deployment settings in the installation's private
-configuration. Keep credentials in its supported secret store, not instructions,
-example files or Git. Grant access to the dedicated mailbox only, not unrelated
-personal mail.
+## Keep each address with its agent
+
+An agent that has an email address declares it in its own definition. In the
+runtime-neutral scaffold, use an optional `Email` line in
+`agents/<name>/agent.md`, as the [helper](../agents/helper/agent.md) demonstrates:
+
+```markdown
+# Release-note helper
+
+Email: `helper@example.com` (synthetic example; no mailbox is connected).
+```
+
+Replace the synthetic address in your company copy when assigning a real one.
+Omit the line for agents without email; do not infer an address from a folder
+name or give every agent an inbox automatically. This is descriptive metadata,
+not an instruction to send mail or evidence that an alias is provisioned.
+
+Keep one authoritative address with the role. If the selected runtime supports
+typed email metadata, put it in that agent's machine-readable definition and
+derive routing from it rather than maintaining a second central address list.
+This guide does not add an `email` field to Dispatch's executable schema or
+make an arbitrary frontmatter key operational. An adapter still needs explicit
+support to read, validate and use the declaration.
+
+Installation configuration selects which agents are exposed and supplies the
+shared mailbox, provider connection, credentials and authorization policy.
+Check declared addresses against the connected mailbox's verified aliases and
+sender identities before enabling them; reject conflicting address ownership.
+An address change is a deliberate routing migration, not permission to reassign
+old conversation history to another role.
+
+Keep the public template generic. Real role addresses belong in the company's
+appropriately private definitions; private mailbox settings and allowed
+correspondents belong in installation configuration. Keep credentials in its
+supported secret store, not instructions, example files or Git. Grant access to
+the dedicated mailbox only, not unrelated personal mail.
 
 ## Keep role, channel and state separate
 
@@ -40,9 +71,9 @@ recipient alias
   -> mail adapter: send the permitted reply as that alias
 ```
 
-The role owns its purpose, instructions, skills and permitted work. The
-installation binds channels to that role; the adapter owns mail delivery,
-filing and thread mapping. Shared transport mechanics belong in the chosen
+The role owns its purpose, instructions, skills, optional email address and
+permitted work. The installation enables channels for that role; the adapter
+owns mail delivery, filing and thread mapping. Shared transport mechanics belong in the chosen
 runtime or integration package, not copied into every agent. The company owns
 its routing and authorization policy.
 
@@ -107,14 +138,16 @@ the same email again.
 
 ## Adopt and verify
 
-1. Choose a dedicated mailbox and the existing roles to expose. Decide who may
-   write to them, what work email can authorize and who handles unmatched mail.
+1. Choose a dedicated mailbox and the existing roles to expose. Declare each
+   assigned address in its owning agent definition. Decide who may write to them,
+   what work email can authorize and who handles unmatched mail.
 2. Configure aliases, filing and sender identities with the mail provider.
    Authorize narrowly scoped mailbox access through the installation's supported
    credential flow. Mailbox setup alone is not an operational agent.
-3. Select or implement the adapter and private bindings. Document startup,
-   durable state, delivery receipts and recovery beside the integration.
-   If using Dispatch, keep reusable transport in Dispatch and company bindings
+3. Select or implement the adapter and private connection settings. Validate
+   enabled agents' declared addresses against provider configuration. Document
+   startup, durable state, delivery receipts and recovery beside the integration.
+   If using Dispatch, keep reusable transport in Dispatch and company definitions
    in the company repository; this guide does not prescribe an unshipped API.
 4. Run controlled end-to-end checks using authorized test correspondents.
    Record the actual adapter/definition revisions and observed results privately.
@@ -123,6 +156,7 @@ Before enabling ordinary mail, verify:
 
 | Check | Required observation |
 | --- | --- |
+| Address declaration | Address belongs to its agent definition; absent email stays disabled and conflicting ownership is rejected |
 | First message to each alias | Correct filing and role; exactly one admitted assignment and a reply from the selected alias |
 | Follow-up after restart | Same durable conversation, retained context and no replayed assignment or reply |
 | New thread with the same subject | Separate conversation and no unrelated history disclosure |

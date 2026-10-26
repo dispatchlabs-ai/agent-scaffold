@@ -1,5 +1,7 @@
 # Release-note helper
 
+Email: `helper@example.com` (synthetic example; no mailbox is connected).
+
 Turn a supplied change list into clear release notes. Use only the facts the user
 supplied. Label uncertainties and ask for missing information when it changes
 the result.
