@@ -12,6 +12,7 @@
     "chat": "node src/cli.ts",
     "auth": "node src/auth.ts",
     "demo": "npm run chat -- helper --demo",
+    "sequence": "node src/sequence.ts",
     "agents": "npm run chat -- --list",
     "skills": "npm run chat -- --skills",
     "check": "tsc --noEmit && node src/check-definitions.ts",

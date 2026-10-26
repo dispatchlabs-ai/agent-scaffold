@@ -19,7 +19,7 @@ for (const entry of entries) {
   }
   try {
     const agent = await loadAgent(root, entry.id);
-    const targets = [...(agent.delegates ?? []), ...(agent.handoff ? [agent.handoff.target] : [])];
+    const targets = [...(agent.messages ?? []), ...(agent.delegates ?? []), ...(agent.handoff ? [agent.handoff.target] : [])];
     for (const target of targets) {
       if (!entries.some(candidate => candidate.runnable && candidate.id === target))
         problems.push(`${entry.id}: ${target} is not a runnable agent`);

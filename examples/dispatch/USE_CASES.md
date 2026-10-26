@@ -1,21 +1,29 @@
 # Supported workflows
 
-- Copy a working reference repository and customize company-owned definitions.
-- Run a clearly labeled, credential-free scripted example with both skill scopes.
-- Chat directly in a terminal using your own supported provider and API key.
-- Configure a native credential store or existing vault helper, inspect source
-  metadata, rotate/remove a source, and explicitly use session-only or injected
-  environment credentials without keeping secrets in the repository.
-- Continue local conversations after restart; inspect their history without a
-  model call; make deliberate definition and skill updates while work is idle.
-- Discover company skills and the selected agent's own skills, read supporting
-  text on demand and retain content revision evidence with tool results.
-- Upgrade the shared runtime as a locked public dependency without copying code.
-- With an updated local runner build, keep a Foreman working continuously toward
-  a repository goal, delegate bounded assignments to workers, recover or pause
-  the saved loop, and land a finished change through the lander role. Every role
-  receives repository rules and its own instructions. See the
-  [local prototype guide](docs/foreman.md).
+The `UC-D` identifiers belong to this optional implementation; checked cases have
+recorded implementation evidence, with platform and historical limits in the
+[changelog](../../CHANGELOG.md), not a claim of universal live-model reliability.
+
+## 1. Define and run agents
+
+- [x] **UC-D001:** Customize company-owned definitions in a copy of the reference.
+- [x] **UC-D002:** Run the clearly labeled credential-free helper demo with both skill scopes.
+- [x] **UC-D003:** Chat directly in a terminal using a supported provider and the operator's credentials.
+- [x] **UC-D004:** Discover company and agent-local skills, read supporting text and retain revision evidence.
+
+## 2. Operate the runtime
+
+- [x] **UC-D005:** Configure, inspect, rotate and remove native/helper credential sources, or explicitly select session/environment input without repository secrets.
+- [x] **UC-D006:** Resume saved conversations, inspect history without model calls and deliberately update idle definitions and skills.
+- [x] **UC-D007:** Upgrade the externally owned shared runtime through a locked installation without vendoring it into definitions.
+
+## 3. Compose repository and peer workflows
+
+- [x] **UC-D008:** Adapt the [local Foreman prototype](docs/foreman.md) for continuous repository work, bounded worker delegation, recovery and optional manual landing.
+- [x] **UC-D009:** Run the scripted author → self-check → independent reviewer → reply sequence and inspect or recover its native evidence without a replacement assignment.
+- [ ] **UC-D010:** Use the independent author/reviewer sequence with live providers and verify the resulting work against the role instructions.
+
+UC-D010's entrypoint is implemented; live-model acceptance remains unqualified.
 
 This scaffold intentionally contains no web app, checked-in vendor archives or
 setup wizard. Slack and gateway integration remain optional. Trusted local use

@@ -9,7 +9,7 @@ instructions and skills. Names use lowercase letters, digits and hyphens and
 start with a letter. Run `npm run chat -- <your-name>`. There is no registration
 wizard or generated runtime code to maintain.
 
-With the updated [local runner](foreman.md), every agent also receives applicable
+With the [compatible parent runtime](runtime-installation.md), every agent also receives applicable
 repository `AGENTS.md` instructions. `delegates: ["worker"]` makes the named role
 available through native foreground child conversations. Each child loads its
 own `agent.md` and the shared rules; assignments must supply their own context.
@@ -18,7 +18,8 @@ Use `--update-definitions` while idle after changing roles or scaffold rules.
 `agent.ts` may declare the trigger (`manual`; `continuous` with `delayMs`; or
 `interval` with `everyMs`), the iteration `input`, native `extensions`, a
 `coding` checkout, scoped `skills`, `delegates` naming other roles and a
-`handoff` target. Which fields exist is this implementation's choice, not a
+`handoff` target, or `messages` naming independently addressable peers.
+Which fields exist is this implementation's choice, not a
 requirement of the directory structure. Only documented fields have runtime
 meaning; TypeScript also checks object literals passed to `defineAgent`. Extra
 frontmatter keys are not a substitute for fields in `agent.ts`.
@@ -27,8 +28,28 @@ Run `npm run check` to type-check and load every runnable definition, validate
 folder names and target existence, and require discovered skills when enabled.
 Draft folders without `agent.ts` are reported and skipped. This loads trusted
 modules but starts no agents or model requests; it does not prove model or tool
-behavior. Use the parent Runner alpha.5 installation for foreground delegation;
-use the local runner for repository roles even when definition checks pass.
+behavior. Install the source revision in [runtime installation](runtime-installation.md);
+the older alpha.5 archive does not support instance messages.
+
+## Independent-agent sequences
+
+Start with [the complete walkthrough](independent-agents.md), not the single-agent
+terminal command. Copy `agents/author/` and `agents/reviewer/`, then adapt their
+instructions and `src/sequence.ts` to your workflow. The executable definition
+belongs in `agents/<name>/agent.ts`; model selection and behavior are in
+`agent.md`. `messages: ["author", "reviewer"]` grants the author instance tools to
+address those roles, including itself. It does not determine when to hand off.
+
+Both definitions must be selected in one `ChatService`. The allowlist neither
+starts an unselected role nor supplies its credentials, adapters or tools.
+Omitting the recipient instance creates a separate top-level conversation.
+Use an exact self ID and `reply: false` for self-continuations; use `reply: true`
+for an independent review whose answer should come back automatically.
+
+Use `delegates` for private, parent-owned child work instead. The `handoff`
+configuration field also belongs to the private-child helper; it is not the
+independent message pattern. The existing Foreman example remains a separate
+option, not a required coordinator for peer sequences.
 
 ## Test prompts
 

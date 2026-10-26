@@ -79,11 +79,21 @@ bounded worker delegation. Each completed pass leads to the next in the same sav
 conversation; use `--once` for an assessment. The parent installation supplies
 the Runner snapshot used by every role.
 
+## Try independent agents
+
+For **work → review → reply**, follow the
+[independent-agent walkthrough](docs/independent-agents.md). Run
+`npm run sequence -- --demo` for the credential-free scripted path, or use your
+provider for live work. It serves `author` and `reviewer` together with separate
+conversations and native recovery; neither is a child of the other.
+The [installation guide](docs/runtime-installation.md) pins source with messaging
+support; the older alpha.5 archive does not include it.
+
 ## What you own
 
 | Location | Working example |
 | --- | --- |
-| `agents/` | Helper instructions, its runnable definition and release-note skill |
+| `agents/` | Helper, repository roles, and independent author/reviewer definitions |
 | `skills/` | Company writing guidance available to agents that enable skills |
 | `src/` | CLI choices, direct model connections and the scripted demo |
 | `docs/` | Setup, authoring and operations guides |

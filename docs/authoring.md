@@ -16,6 +16,30 @@ merges. Supply each agent with the applicable repository `AGENTS.md` and its
 own `agent.md`. The optional Dispatch example has a
 [local runnable prototype](../examples/dispatch/docs/foreman.md).
 
+## Sequences of independent agents
+
+Use an independent-agent sequence when each role should have its own address,
+history, tools and lifecycle: for example, improve a repository until a complete
+pass changes nothing, then ask another agent to review the exact result.
+Create an instance per assignment, not another definition per target repository.
+
+The working agent can continue in its own instance, then send an explicit handoff
+to a new or existing peer. Include the scope, source or exact revisions, evidence,
+remaining questions, and authority. The peer does not inherit the sender's
+history or permissions. An optional reply returns findings; it is not a new
+assignment and should not accidentally restart the workflow.
+
+Keep the stopping condition and business sequence in role instructions. Let the
+chosen runtime own admission, persistence and recovery. Do not add a supervisor,
+notes subsystem or scheduler merely to connect the roles. Existing company
+knowledge, such as a wiki, remains the home for durable findings.
+
+The optional Dispatch [independent-agent walkthrough](../examples/dispatch/docs/independent-agents.md)
+includes complete author/reviewer definitions, service wiring, a credential-free
+scripted demonstration and live commands. It contrasts peer messages with
+private child delegation; neither the directory layout nor this guide implements
+messaging for other runtimes.
+
 ## Two skill scopes
 
 ```text
@@ -93,13 +117,12 @@ example shows one such pairing.
 
 Supply role instructions and shared rules when starting each conversation;
 automatic loading depends on the runtime. Past findings are not automatically
-shared with other roles or conversations. Keep durable
-findings in a plain shared file — `NOTES.md` at the repository root for
-project-wide facts, or beside an agent's `agent.md` for its own. Read
-applicable notes before starting an assignment and append what the work
-verifies, with a date, keeping open questions separate from established
-findings. This is an ordinary file convention that any file-reading runtime
-can follow without support.
+shared with other roles or conversations. Use the company's established knowledge
+source, such as a wiki, for durable findings, and carry the immediate assignment
+and evidence in the handoff. A plain `NOTES.md` can be an alternative for a
+file-only setup, not a requirement of independent-agent sequences. Date findings
+and distinguish verified facts from open questions. Links alone grant neither
+retrieval access nor permission to write.
 
 Keep credentials out of instructions, skills and assets. Review what your runtime
 will send to a model provider before including company information.

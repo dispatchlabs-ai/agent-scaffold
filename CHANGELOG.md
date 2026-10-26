@@ -1,5 +1,39 @@
 # Changelog
 
+## Independent-agent starter — October 26, 2026
+
+- Make independent-agent sequences discoverable from the root README and
+  runtime-neutral authoring guide, with a complete optional Dispatch walkthrough.
+- Add separate manual author/reviewer definitions and a small shared-host CLI.
+  An author continues its checking pass in the same instance, messages a new
+  independent reviewer, then receives its findings without restarting the cycle.
+  No coordinator, notes subsystem, scheduling service or second recovery engine.
+- Include a credential-free scripted demonstration and live-provider commands.
+  Validate recipient names, explain native ownership and scope, and keep
+  runtime installation outside the definition repository.
+- Document building public Runner source `1ba8ef000651f9b3ee2744a5709483935bd2195a`;
+  the earlier alpha.5 archive predates instance messages. No Runner release or
+  existing company-service deployment is part of this scaffold change.
+- Give the workflow catalogs stable identifiers, preserving the existing goals
+  and explicitly leaving live sequence acceptance unchecked.
+
+Qualification on macOS ARM64 and Linux ARM64 (Debian Bookworm), Node 24.22.1:
+fresh dependency installation, TypeScript/definition checks, helper demo/history,
+independent sequence/history and idle resume passed. Native macOS records
+confirmed ownerless author/reviewer conversations, self-continuation without a
+reply, independent review with a reply, and separate instances on repeated runs.
+A process killed during an admitted tool resumed with the original task/input
+identities and completed the review; history inspection generated no new model
+entries or assignments. The stale owner lock aged out normally, without manual
+deletion. Invalid command combinations, missing input and wrong single-agent
+startup returned nonzero exits. Relative links and the root's runtime-free
+boundary were checked.
+
+The demonstration scripts model responses: these observations do not qualify
+live-model judgment, real repository cleanup/UX review, fresh-agent onboarding,
+Windows, Linux AMD64 or every crash mode. Historical platform checks below retain
+their original scope. No automated functional suite was added.
+
 ## Runtime separation — October 23, 2026
 
 - Move Runner/Pi version selection to the parent installation. Definition packages

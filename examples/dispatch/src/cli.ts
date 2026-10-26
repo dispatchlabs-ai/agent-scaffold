@@ -30,6 +30,8 @@ try {
     if (values.skills) {
       for (const skill of agent.skillCatalog ?? []) console.log(`${skill.id}\t${skill.revision.slice(0, 12)}\t${skill.description}`);
     } else {
+      if (agent.messages?.length)
+        throw new Error("Messaging definitions need a shared service. Use npm run sequence for author/reviewer; see docs/independent-agents.md.");
       if (values.prompt && values["prompt-file"]) throw new Error("Choose --prompt or --prompt-file.");
       if (values.once && values.continuous) throw new Error("Choose --once or --continuous.");
       const continuous = !values.history && !values.once && (values.continuous || name === "foreman");

@@ -11,9 +11,22 @@ Create a parent installation, then place the real company checkout beneath it:
 mkdir agent-workspace
 cd agent-workspace
 npm init -y
-npm install https://github.com/dispatchlabs-ai/dispatch/releases/download/runner-v0.6.0-alpha.5/dispatch-runner-0.6.0.tgz
+# Build the public source snapshot that includes independent-instance messages.
+git clone --filter=blob:none https://github.com/dispatchlabs-ai/dispatch.git runtime-source
+git -C runtime-source checkout 1ba8ef000651f9b3ee2744a5709483935bd2195a
+npm ci --prefix runtime-source --workspace @dispatch/runner
+npm run build --prefix runtime-source --workspace @dispatch/runner
+npm pack ./runtime-source/packages/runner
+npm install ./dispatch-runner-0.6.0.tgz
 # Clone or place the company repository inside this directory.
 ```
+
+Use Node 24.22.1 or later within Node 24. In PowerShell, use `npm.cmd` in these
+commands. The immutable source revision is deliberate: package version `0.6.0`
+alone does not identify messaging support, and the earlier public alpha.5 archive
+does not contain it. No new Runner release is implied by this guide. Keep the
+packed archive, its source revision, and the installation lockfile together.
+The build source and installed runtime stay outside the company checkout.
 
 Keep the parent's manifest and lockfile with the deployment configuration. Run
 `npm ci` and the repository's usual checks from the company checkout to install

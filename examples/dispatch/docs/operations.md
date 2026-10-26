@@ -42,6 +42,15 @@ upstream versions and removal conditions beside any copied implementations.
 
 ## Dependencies and upgrades
 
+The [independent-agent sequence](independent-agents.md) uses separate
+`.state/sequence/demo/` and `.state/sequence/live/` roots, with an SQLite store per
+role and an independently addressable conversation per assignment.
+`npm run sequence -- --demo --history` reads saved messages without resuming work;
+`--resume` resumes admitted work without submitting a replacement assignment.
+Do not run another writer on those stores or confuse the first input's completion
+with the later review's completion. Native message tasks include delivery and
+automatic-reply tracking; the example waits for background work too.
+
 Credential setup is separate from conversation state. Use
 [the credential guide](credentials.md) to inspect, rotate or remove a configured
 source. The runtime does not load `.env` files or implicitly use ambient API keys.

@@ -72,6 +72,15 @@ Try the helper's [release-note prompt](agents/helper/test-prompts/release-notes.
 and [correction follow-up](agents/helper/test-prompts/correction-and-evidence.md)
 with your chosen agent; each includes its inputs and expected results.
 
+## Connect independent agents
+
+For work → review workflows, start with
+[the pattern](docs/authoring.md#sequences-of-independent-agents) and
+[the runnable Dispatch walkthrough](examples/dispatch/docs/independent-agents.md).
+It shows one instance continuing its own work, handing off to an independent
+reviewer, and receiving the review. The scripted demonstration needs no API key;
+live execution uses your configured provider. The root scaffold stays runtime-free.
+
 ## Optional: run the Dispatch example
 
 If you want a ready-made terminal agent, [examples/dispatch](examples/dispatch/README.md)
