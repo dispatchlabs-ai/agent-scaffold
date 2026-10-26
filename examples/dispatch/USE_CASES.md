@@ -25,7 +25,15 @@ recorded implementation evidence, with platform and historical limits in the
 
 UC-D010's entrypoint is implemented; live-model acceptance remains unqualified.
 
-## 4. Schedule assignments — accepted design, not implemented
+## 4. Coordinate parallel QA
+
+- [x] **UC-D012:** Run a scripted coordinator with parallel native clones, preserve inherited tool filters, review complete synthetic traces and reconcile both passing and failing findings.
+- [ ] **UC-D013:** Use live model judgment for the parallel QA example and verify its complete trace review and final reconciliation.
+
+The [walkthrough](docs/parallel-qa.md) supplies the entrypoint for both modes.
+Recorded synthetic evidence is not fresh application acceptance.
+
+## 5. Schedule assignments — accepted design, not implemented
 
 - [ ] **UC-D011:** Define schedules and predefined prompts with their owning agent, and run a daily assignment at a chosen local time and timezone through shared Runner scheduling.
 

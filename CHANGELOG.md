@@ -1,5 +1,37 @@
 # Changelog
 
+## Parallel QA coordinator — October 26, 2026
+
+- Add a runtime-neutral QA coordinator role and a runnable optional Dispatch
+  example. One definition serves coordinator and child assignments; fresh native
+  children inherit the stored configuration and return their own findings.
+- Keep complete dependent conversation chains together, with independent variants
+  in separate children. Require per-expectation checks, complete target tool-trace
+  review, and explicit failed, blocked and missing results in the final report.
+- Demonstrate two synthetic recorded traces, including a convincing final answer
+  contradicted by its tool result. Scripted model responses make the example
+  credential-free; a completed demonstration is not a passing suite.
+- Reuse the sequence host for `npm run parallel`, with separate native state,
+  history and resume. Keep cloning/recovery in Runner and domain behavior in
+  definitions; no scheduler, notes store or arbitrary worker cap.
+- Pin public Runner source `42119776de70b44a45a05e8ae846577a81096157` in the
+  parent-installation guide. No shared installation or released package is changed.
+
+Qualification on macOS ARM64, Node 24.22.1: type/definition checks, existing helper
+and sibling demos, parallel demo/history and idle resume passed. Native records
+showed overlapping child tasks, fresh assignments and byte-identical stored
+parent/child configurations. Removing the evidence tool through both native
+filters kept it unavailable to both children; their blocked reports reached the
+coordinator instead of being counted as passes. A process killed after both
+children existed recovered those same child/task IDs and stable submissions,
+without duplicate children or manual lock deletion.
+
+The parallel demo, type/definition checks, history and idle resume also passed in
+a non-root, read-only Linux ARM64 Docker container with Node 24.22.1 and the
+task-local dependency installation. These observations do not qualify real model
+judgment, a live application, every crash/cancellation mode, Windows, Linux AMD64,
+fresh-agent onboarding or a company rollout. No automated functional suite added.
+
 ## Agent-local schedule design — October 26, 2026
 
 - Document agent-owned schedules and predefined prompts, with optional adjacent

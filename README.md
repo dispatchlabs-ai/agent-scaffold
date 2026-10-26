@@ -81,6 +81,15 @@ It shows one instance continuing its own work, handing off to an independent
 reviewer, and receiving the review. The scripted demonstration needs no API key;
 live execution uses your configured provider. The root scaffold stays runtime-free.
 
+## Coordinate parallel QA
+
+For independent checks with one final report, use the
+[QA coordinator pattern](docs/authoring.md#parallel-qa-with-a-coordinator) and
+[runnable parallel example](examples/dispatch/docs/parallel-qa.md).
+The coordinator clones its configuration into fresh children; each reviews its
+assigned output and complete tool trace. The credential-free demo deliberately
+includes a failure so a convincing answer cannot hide contradictory tool evidence.
+
 ## Schedule an agent
 
 Keep schedules and assignment prompts with their owning agent. Read

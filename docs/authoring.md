@@ -40,6 +40,33 @@ scripted demonstration and live commands. It contrasts peer messages with
 private child delegation; neither the directory layout nor this guide implements
 messaging for other runtimes.
 
+## Parallel QA with a coordinator
+
+Use a coordinator when independent assignments should be performed by copies of
+the same agent and reconciled into one result. Start with the
+[QA role](../agents/qa-coordinator/agent.md). Unlike independent siblings,
+these children belong to the coordinator's work and inherit its configuration
+and granted tools, but begin with fresh histories.
+
+Assign a complete conversation chain to each child. Keep dependent follow-ups in
+order; run independent variants from equivalent fresh state. Each assignment
+includes its exact prompts, plain-English expectations, target/source identity,
+permitted effects, isolated mutable resources and required evidence. Launch
+independent children together instead of waiting for one before assigning another.
+
+Each child checks every expectation and the entire native trace, including tool
+arguments, results, errors and recovery. The QA transcript is not the trace of
+the system under test. Keep expectations outside that system's accessible context.
+Missing traces or unperformed UI checks are gaps, not passes. Reconcile every
+assignment with a result, including failed children; successful execution is not
+acceptance. Use the existing company knowledge source for durable findings.
+
+The optional [Dispatch walkthrough](../examples/dispatch/docs/parallel-qa.md)
+demonstrates native parallel clones using two synthetic recorded traces, one
+passing and one failing. Runtime configuration inheritance is not a filesystem
+copy or a security boundary. The host still owns credentials and permissions;
+Pi owns tasks and recovery. No second scheduler or worker limit is needed.
+
 ## Agent-local schedules
 
 Keep schedule definitions and their assignment prompts with the agent that owns

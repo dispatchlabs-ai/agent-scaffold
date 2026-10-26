@@ -15,6 +15,7 @@ boundaries remain in the linked guides and [changelog](CHANGELOG.md).
 - [x] **UC-006:** Adapt the Foreman and worker roles for continuous repository improvement through the chosen runtime.
 - [x] **UC-007:** Route an authorized finished change through an optional Lander that verifies, reconciles and reports before integration.
 - [x] **UC-009:** Adapt the independent-agent pattern to continue an assignment, hand off explicit evidence and scope, and receive a peer's reply.
+- [x] **UC-010:** Adapt a QA coordinator that assigns independent conversation chains to same-configuration children, reviews complete tool traces and reconciles every result.
 
 ## 3. Opt into Dispatch
 

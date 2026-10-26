@@ -7,9 +7,9 @@ import { withAbortSignal } from "@earendil-works/chord/context";
 import { context, createRunner, loadAgent, type ChatService, type UserCredentials } from "@dispatch/runner";
 import { liveModels, userCredentials } from "./models.ts";
 import { sequenceDemoModels } from "./sequence-demo.ts";
+import { parallelDemoModels } from "./parallel-demo.ts";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-const names = ["author", "reviewer"];
 let service: ChatService | undefined;
 let credentials: UserCredentials | undefined;
 const watches: { stop(): Promise<void> }[] = [];
@@ -26,20 +26,24 @@ try {
   const { values } = parseArgs({ options: {
     demo: { type: "boolean" }, history: { type: "boolean" }, resume: { type: "boolean" },
     help: { type: "boolean" }, "prompt-file": { type: "string" },
+    parallel: { type: "boolean" },
     "state-dir": { type: "string" }, "update-definitions": { type: "boolean" },
   } });
   if (values.help) {
-    console.log("Usage: npm run sequence -- [--demo] [--prompt-file PATH | --resume | --history] [--state-dir PATH] [--update-definitions]\nEach new run creates an author instance. --resume submits nothing; --history does not resume work.\nCtrl+C suspends the host; rerun with the same options and --resume. See docs/independent-agents.md.");
+    console.log("Usage: npm run sequence -- [--demo] [--prompt-file PATH | --resume | --history] [--state-dir PATH] [--update-definitions]\nUse npm run parallel for the owned-child QA example. Each run creates a new primary instance.\n--resume submits nothing; --history does not resume work. Ctrl+C suspends the host.\nSee docs/independent-agents.md and docs/parallel-qa.md.");
   } else {
+    const names = values.parallel ? ["qa-coordinator"] : ["author", "reviewer"];
+    const workflow = values.parallel ? "parallel" : "sequence";
     if ([values["prompt-file"], values.resume, values.history].filter(Boolean).length > 1)
       throw new Error("Choose --prompt-file, --resume or --history.");
-    if (values.demo && values["prompt-file"]) throw new Error("The scripted demo uses only assets/sample-changes.md.");
+    if (values.demo && values["prompt-file"]) throw new Error("The scripted demo uses only its synthetic example inputs.");
     // Read inputs and validate credentials before creating state or resuming work.
     const prompt = values.resume || values.history ? undefined
-      : await readFile(values["prompt-file"] ? resolve(values["prompt-file"]) : resolve(root, "assets/sample-changes.md"), "utf8");
+      : values.parallel && !values["prompt-file"] ? "Review the supported and ineligible example cases in parallel, including every trace record, and reconcile both reports."
+        : await readFile(values["prompt-file"] ? resolve(values["prompt-file"]) : resolve(root, "assets/sample-changes.md"), "utf8");
     if (prompt !== undefined && !prompt.trim()) throw new Error("The assignment is empty.");
     if (!values.demo && !values.history) credentials = await userCredentials();
-    const models = values.demo ? sequenceDemoModels() : liveModels(credentials);
+    const models = values.demo ? (values.parallel ? parallelDemoModels() : sequenceDemoModels()) : liveModels(credentials);
     if (!values.demo && !values.history) {
       for (const name of names) {
         const { model } = await loadAgent(root, name);
@@ -48,12 +52,12 @@ try {
           throw new Error(`Configure credentials with npm run auth -- login ${model.provider}. The demo needs no credentials.`);
       }
     }
-    const stateRoot = resolve(values["state-dir"] ?? resolve(root, ".state", "sequence", values.demo ? "demo" : "live"));
-    service = await createRunner({ namespace: "scaffold-sequence" }).ChatService.open({
+    const stateRoot = resolve(values["state-dir"] ?? resolve(root, ".state", workflow, values.demo ? "demo" : "live"));
+    service = await createRunner({ namespace: `scaffold-${workflow}` }).ChatService.open({
       root, stateRoot, names, models, demo: !!values.demo, resume: false,
       updateDefinitions: values["update-definitions"],
     });
-    console.log(`State: ${stateRoot}\n${values.demo ? "Scripted demo: no live model or credentials." : "Live sequence: supplied content goes to each configured model provider."}`);
+    console.log(`State: ${stateRoot}\n${values.demo ? "Scripted demo: no live model or credentials." : `Live ${workflow}: supplied content goes to each configured model provider.`}`);
     if (values.history) {
       for (const chat of await service.list()) {
         console.log(`\n${chat.id}: ${display(chat.title)}`);
@@ -85,12 +89,12 @@ try {
           }));
         }
       }));
-      let author: string | undefined;
+      let primary: string | undefined;
       interrupted.signal.throwIfAborted();
       if (prompt !== undefined) {
         const key = randomUUID();
-        const chat = await service.create("author", "cli", key, "Release notes and independent review");
-        author = chat.id;
+        const chat = await service.create(names[0], "cli", key, values.parallel ? "Parallel QA review" : "Release notes and independent review");
+        primary = chat.id;
         const receipt = await service.submit(chat.id, prompt, key, "followUp", "cli");
         console.log(`Assignment: ${chat.id}; submission: ${receipt.submissionId}`);
       }
@@ -111,13 +115,13 @@ try {
         if (!pending.length) break;
         await Promise.all(pending);
       }
-      if (values.demo && author) {
-        const snapshot = await service.snapshot(author);
-        if (!snapshot.messages.some(message => message.role === "assistant"
-          && message.text.startsWith("Review received;")
-          && message.text.includes("(answered)")
-          && message.text.includes("Scripted review: the draft preserves all three supplied changes")))
-          throw new Error("The scripted sequence did not receive its review. Inspect history and native tool results.");
+      if (values.demo && primary) {
+        const snapshot = await service.snapshot(primary);
+        if (!snapshot.messages.some(message => message.role === "assistant" && (values.parallel
+          ? message.text.startsWith("Parallel QA complete: 2/2") && message.text.includes("supported: PASS") && message.text.includes("ineligible: FAIL")
+          : message.text.startsWith("Review received;") && message.text.includes("(answered)")
+            && message.text.includes("Scripted review: the draft preserves all three supplied changes"))))
+          throw new Error("The scripted workflow did not receive the expected reports. Inspect history and native tool results.");
       }
       console.log("All admitted work settled. Inspect the findings; idle is not a quality verdict.");
     }

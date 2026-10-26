@@ -89,6 +89,14 @@ conversations and native recovery; neither is a child of the other.
 The [installation guide](docs/runtime-installation.md) pins source with messaging
 support; the older alpha.5 archive does not include it.
 
+## Try parallel QA
+
+Run `npm run parallel -- --demo` after installing the source-pinned runtime.
+The [parallel QA walkthrough](docs/parallel-qa.md) uses one coordinator and two
+fresh children with the same configuration and tool rights. They inspect complete
+synthetic traces and return one pass and one failure, both retained in the final
+report. This is a mechanics demonstration, not live application qualification.
+
 ## Agent-local schedules — design only
 
 The [daily 3 a.m. Eastern example](docs/schedules.md) shows schedules and prompts
