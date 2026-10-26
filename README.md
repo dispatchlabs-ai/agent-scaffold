@@ -98,6 +98,14 @@ Keep schedules and assignment prompts with their owning agent. Read
 This is a documented design, **not implemented cron support**; the working
 manual and continuous examples are unchanged.
 
+## Expose an agent through email
+
+Use [one team mailbox with per-agent aliases](docs/email.md), automatic filing
+and explicit thread routing to existing agent definitions. Email is a channel,
+not a second copy of the role or a mirror of every conversation.
+This is an integration guide with synthetic examples, **not a bundled email
+adapter**.
+
 ## Optional: run the Dispatch example
 
 If you want a ready-made terminal agent, [examples/dispatch](examples/dispatch/README.md)

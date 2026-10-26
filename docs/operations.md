@@ -17,6 +17,15 @@ the revisions and evidence. Mark missing capability as blocked/not run; a plan
 does not establish that the requested action worked. The bundled helper prompts
 are documented examples, not a claim of fresh-model acceptance.
 
+## Email integration
+
+If your company adds email, follow the [shared-mailbox pattern](email.md).
+Verify aliases, complete filing, sender identities, authorized thread routing
+and recovery before enabling ordinary messages. Keep private bindings and
+credentials outside the public template. Labels are presentation, not proof of
+processing or delivery; preserve durable receipts and conversation mappings.
+The scaffold itself does not provision mailboxes or run an email adapter.
+
 ## Optional Dispatch example
 
 The example's commands run from `examples/dispatch/`. Its default conversations

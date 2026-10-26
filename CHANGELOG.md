@@ -1,5 +1,20 @@
 # Changelog
 
+## Shared-mailbox email pattern — October 26, 2026
+
+- Document a dedicated team mailbox with per-agent aliases, complete filing and
+  explicit routing to existing definitions and durable conversations.
+- Separate mail delivery from role behavior and private installation bindings.
+  Cover thread continuity, sender/recipient authorization, reply identity,
+  duplicate handling, uncertain sends and loop prevention.
+- Use synthetic addresses only. Link the guide from onboarding, authoring,
+  operations and the use-case catalog; leave email execution unchecked.
+
+Documentation only: no mail adapter, provider configuration, dependency change
+or live deployment. Relative links, the diff and added content were reviewed for
+private identifiers. The guide's end-to-end checks are acceptance criteria, not
+performed email tests.
+
 ## Parallel QA coordinator — October 26, 2026
 
 - Add a runtime-neutral QA coordinator role and a runnable optional Dispatch

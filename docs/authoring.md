@@ -83,6 +83,15 @@ of containing their prompts and timetables. **This is an accepted design, not
 implemented cron support.** The root scaffold remains runtime-neutral and
 provides no scheduler.
 
+## Email as another channel
+
+Expose existing roles through a dedicated mailbox and per-agent aliases instead
+of duplicating their definitions. Keep mailbox bindings in private installation
+configuration, delivery in an adapter and conversation state in the runtime.
+The [email pattern](email.md) covers complete filing, thread continuity,
+authorization, reply identity and recovery. It is a design guide, not an
+implemented email adapter or an invitation to mirror private conversations.
+
 ## Two skill scopes
 
 ```text
