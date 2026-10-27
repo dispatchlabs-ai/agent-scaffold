@@ -95,8 +95,8 @@ includes a failure so a convincing answer cannot hide contradictory tool evidenc
 Keep schedules and assignment prompts with their owning agent. Read
 [the ownership pattern](docs/authoring.md#agent-local-schedules) and
 [the daily 3 a.m. Eastern example](examples/dispatch/docs/schedules.md).
-This is a documented design, **not implemented cron support**; the working
-manual and continuous examples are unchanged.
+The optional Dispatch example runs native cron/timezone schedules. Its checked-in
+factory enables no automatic work; the root scaffold remains runtime-neutral.
 
 ## Expose an agent through email
 

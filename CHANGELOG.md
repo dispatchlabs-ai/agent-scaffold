@@ -1,5 +1,20 @@
 # Changelog
 
+## Native agent calendars — October 27, 2026
+
+- Replace the scheduling proposal with agent-owned Runner calendars, using an
+  explicit timezone, instance choice and missed-occurrence policy.
+- Add an opt-in author/reviewer calendar service and synthetic demonstration;
+  the checked-in factory remains disabled. Root setup stays runtime-free.
+- Pin cron-capable public Runner source in the parent-installation guide.
+  Native Pi tasks own timers and recovery; no second scheduler or OS cron job.
+
+Qualification on macOS ARM64, Node 24.22.1: type/definition checks, helper,
+sibling and parallel demos, two real calendar occurrences with author/reviewer
+completion, history, bounded expiry and unchanged restart passed. Linux and
+Windows were not exercised. This is source qualification, not a package release
+or a live model deployment.
+
 ## Shared-mailbox email pattern — October 26, 2026
 
 - Document a dedicated team mailbox with per-agent aliases, complete filing and

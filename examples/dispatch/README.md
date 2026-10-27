@@ -97,12 +97,13 @@ fresh children with the same configuration and tool rights. They inspect complet
 synthetic traces and return one pass and one failure, both retained in the final
 report. This is a mechanics demonstration, not live application qualification.
 
-## Agent-local schedules — design only
+## Agent-local schedules
 
 The [daily 3 a.m. Eastern example](docs/schedules.md) shows schedules and prompts
 inside their owning agent's definition, with Runner providing shared execution.
-The proposed `schedules` field and cron/timezone support are **not implemented**.
-The checked-in definitions and `factory.yaml` are unchanged; no timer is enabled.
+Run `npm run schedules -- --demo` after enabling the author in `factory.yaml`.
+The checked-in factory remains disabled. Native timers preserve occurrence and
+submission identities; the scripted model verifies wiring, not live judgment.
 
 ## What you own
 

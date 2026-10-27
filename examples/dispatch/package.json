@@ -17,7 +17,8 @@
     "agents": "npm run chat -- --list",
     "skills": "npm run chat -- --skills",
     "check": "tsc --noEmit && node src/check-definitions.ts",
-    "foreman": "node src/cli.ts foreman"
+    "foreman": "node src/cli.ts foreman",
+    "schedules": "node src/schedules.ts"
   },
   "devDependencies": {
     "@types/node": "24.19.1",

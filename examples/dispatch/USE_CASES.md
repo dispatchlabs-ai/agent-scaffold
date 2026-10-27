@@ -33,12 +33,12 @@ UC-D010's entrypoint is implemented; live-model acceptance remains unqualified.
 The [walkthrough](docs/parallel-qa.md) supplies the entrypoint for both modes.
 Recorded synthetic evidence is not fresh application acceptance.
 
-## 5. Schedule assignments — accepted design, not implemented
+## 5. Schedule assignments
 
-- [ ] **UC-D011:** Define schedules and predefined prompts with their owning agent, and run a daily assignment at a chosen local time and timezone through shared Runner scheduling.
+- [x] **UC-D011:** Define schedules and predefined prompts with their owning agent, and run a daily assignment at a chosen local time and timezone through shared Runner scheduling.
 
-The [agent-local schedule example](docs/schedules.md) documents the proposed API;
-there is no cron implementation or scheduled-run qualification yet.
+The [agent-local schedule example](docs/schedules.md) supplies a runnable definition and service command. Live model judgment remains
+separate from synthetic calendar/recovery qualification.
 
 This scaffold intentionally contains no web app, checked-in vendor archives or
 setup wizard. Slack and gateway integration remain optional. Trusted local use

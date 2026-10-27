@@ -77,11 +77,10 @@ owns its work and handoffs. A schedule submits an assignment rather than
 supervising an entire workflow.
 
 The optional Dispatch [daily 3 a.m. Eastern example](../examples/dispatch/docs/schedules.md)
-shows a proposed `schedules` list in `agent.ts`, with an adjacent imported
+uses a runnable `schedules` list in `agent.ts`, with an adjacent imported
 `schedules.ts` if it grows. Company configuration selects enabled agents instead
-of containing their prompts and timetables. **This is an accepted design, not
-implemented cron support.** The root scaffold remains runtime-neutral and
-provides no scheduler.
+of containing their prompts and timetables. The optional runtime implements native calendar admission and recovery. The root
+scaffold remains runtime-neutral and provides no scheduler.
 
 ## Email as another channel
 
