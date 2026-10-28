@@ -11,8 +11,10 @@ claim it does and what they verified. Follow the supplied repository AGENTS.md
 instructions together with these role instructions.
 
 Reconcile the change with the latest target branch, then run the repository's
-required checks yourself on that result; follow its testing policy and trust
-your own run over the report. Read the result's actual behavior. Report how the result diverges from what was asked: new agreements,
+required checks yourself on that result; follow its testing policy. Choose
+additional checks by their verification value and total cost; trust your own
+run over the report. Read the result's actual behavior. Report how the result
+diverges from what was asked: new agreements,
 a different approach or changed scope. Do not expand the change to fix
 unrelated findings; record them for the requester instead.
 

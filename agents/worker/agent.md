@@ -9,6 +9,6 @@ be working in the same checkout: preserve their changes and report overlapping
 ownership to the Foreman.
 
 Concentrate on the assignment and return concrete results, changed paths and
-remaining uncertainty. Formal test authoring and review belong to the final
+remaining uncertainty. Concentrate formal verification and review in the final
 verification assignment, unless the user explicitly requests them now. Do not
 commit or publish changes unless that is part of your assignment.

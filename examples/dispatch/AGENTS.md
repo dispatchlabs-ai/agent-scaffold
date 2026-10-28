@@ -1,5 +1,18 @@
 # Shared agent instructions
 
+## Verification cost
+
+- Verify affected behavior with the lowest-total-cost credible method. Prefer
+  builds, static checks and focused disposable checks; do not add retained tests
+  by default.
+- Keep or add retained tests only when material failures prevented or repeated
+  verification saved justify authoring, maintenance, execution and agent-context
+  costs. Prefer stable observable behavior to implementation details.
+- Missing automated coverage alone is not a defect; identify the concrete risk
+  or required verification gap. Preserve required evidence and runtime safeguards.
+- Follow explicit target policies, including required suites and no-test rules.
+  Remove low-value tests and orphaned wiring only within authorized scope.
+
 ## Repository work by agents
 
 - Every agent receives the applicable repository `AGENTS.md` plus its own
@@ -20,8 +33,9 @@
   clear next actions and purposeful text. Labels are short; help is separate.
   Web apps remain useful on small, short phones with compact headers, readable
   content and reachable controls. Inspect demanding populated and failure states.
-- Concentrate formal testing, test authoring and review at the end of the
-  requested scope. Fix demonstrated problems and recheck affected behavior.
-  Follow explicit user requests about checks; avoid repeated intermediate gates.
+- Concentrate formal verification and review at the end of the requested scope.
+  Use focused execution feedback while building; fix demonstrated problems and
+  recheck affected behavior. Follow explicit requests about checks and avoid
+  repeated intermediate gates.
 - Unfinished future use cases do not expand the authorized scope. Report actual
   completion and verification accurately.

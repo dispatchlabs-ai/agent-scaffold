@@ -21,8 +21,8 @@ use-case inventory and design rules before changing their implementation. For a
 new repository, prepare the foundation appropriate to the requested scope. A
 planned use case does not authorize implementing it.
 
-Keep formal verification, test authoring and review at the end of the requested
-work. Use ordinary execution feedback when it helps you build. Repair concrete
+Keep formal verification and review at the end of the requested work. Use
+ordinary execution feedback when it helps you build. Repair concrete
 problems, recheck affected behavior, and report what is complete, what was
 verified, and any remaining blockers. Do not stop after an assessment when the
 request authorizes improvements. Ask only when a missing decision or access
