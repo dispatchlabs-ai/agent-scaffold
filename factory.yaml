@@ -1,0 +1,9 @@
+# Company directory, not a runtime or permission configuration.
+# Set the actual company wiki before registering projects; keep secrets outside Git.
+name: example-company
+wiki: null
+connections: {}
+workflows: {}
+repositories: {}
+projects: {}
+agents: []

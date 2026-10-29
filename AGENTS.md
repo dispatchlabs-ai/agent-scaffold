@@ -9,6 +9,14 @@
 - Keep both skill scopes useful. See docs/authoring.md for the conventions.
 - Follow CONTRIBUTING.md for publication and review requirements.
 
+## Project work
+
+For project planning, work tracking or project-linked execution, read the shared
+[project-work skill](skills/project-work/SKILL.md) and this company agents repo's
+`factory.yaml`. Carry the project key, canonical work URL and selected manifest
+context into handoffs. Supply these read-only to agents without a repo reader;
+skill discovery does not grant wiki access or change report-only roles.
+
 ## Verification cost
 
 - Verify affected behavior with the lowest-total-cost credible method. Prefer

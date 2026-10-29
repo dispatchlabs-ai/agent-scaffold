@@ -9,7 +9,9 @@ Choose **Use this template → Create a new repository** on
 https://github.com/dispatchlabs-ai/agent-scaffold, choose your repository's
 visibility and clone it. A plain clone also works for exploring the reference.
 You can instead copy `agents/`, `skills/`, `src/`, `docs/` and `assets/` into an
-existing repository, preserving its files and instructions. `examples/` is optional.
+existing repository, preserving its files and instructions. Also merge the
+root `AGENTS.md` project-work guidance and `factory.yaml` company directory;
+preserve any existing deployment fields. `examples/` is optional.
 
 ## Follow the example
 
@@ -25,6 +27,10 @@ resources. The scaffold requires no credentials or packages and makes no model
 requests. Your own agent can read the files to draft release notes; that agent
 supplies the execution and model access. See [authoring](authoring.md) for the
 conventions.
+
+For project work, read [the shared skill](../skills/project-work/SKILL.md).
+Set the company wiki in `factory.yaml`, then register only real projects with
+verified wiki pages. Empty inventories are intentional, not executable setup.
 
 For an agent following this guide: show the directory structure and explain the
 two skill scopes. Help with the requested edits and preserve existing user work.

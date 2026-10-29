@@ -96,6 +96,12 @@ implemented email adapter or an invitation to mirror private conversations.
 
 ## Two skill scopes
 
+[Project work](../skills/project-work/SKILL.md) supplies the shared conventions
+and Markdown templates. `factory.yaml` is the company/project directory, not a
+workflow engine. Supply the skill and selected manifest context when the host
+cannot read this repo. The optional Dispatch example is a separate package;
+copy/bind this skill there when adopting it rather than assuming root discovery.
+
 ```text
 skills/company-writing-style/SKILL.md
 agents/helper/skills/draft-release-notes/SKILL.md

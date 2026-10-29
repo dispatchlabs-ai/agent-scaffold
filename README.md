@@ -37,6 +37,7 @@ No Node.js, npm, Dispatch account or provider credential is needed to adopt the
 structure.
 
 ```text
+factory.yaml                  # Company/wiki/project directory; no runtime
 agents/
   helper/
     agent.md
@@ -48,6 +49,8 @@ agents/
       references/template.md
 skills/
   company-writing-style/SKILL.md
+  project-work/SKILL.md
+  project-work/assets/        # Optional Markdown page/section templates
 src/
   README.md
 docs/
@@ -59,6 +62,7 @@ examples/
 
 | Location | Purpose |
 | --- | --- |
+| `factory.yaml` | Company wiki, connections, project URLs and repository relationships |
 | `agents/` | One folder per agent, with instructions, its own skills, and reusable test prompts |
 | `skills/` | Company guidance reusable across agents |
 | `src/` | A place for company code and integrations when you add them |
@@ -73,6 +77,13 @@ and [correction follow-up](agents/helper/test-prompts/correction-and-evidence.md
 with your chosen agent; each includes its inputs and expected results.
 
 ## Connect independent agents
+
+For project planning and tracking, use the shared
+[project-work skill](skills/project-work/SKILL.md). Start with one wiki page,
+keep each work item canonical, and expand into linked pages only when useful.
+Projects live in `factory.yaml`; projects and repositories may overlap.
+The templates add no wiki data types, tracker, scheduler or connection grants.
+The root package is runtime-neutral; supply it to your agent explicitly.
 
 For work → review workflows, start with
 [the pattern](docs/authoring.md#sequences-of-independent-agents) and
