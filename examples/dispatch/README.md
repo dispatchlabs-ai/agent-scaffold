@@ -122,3 +122,7 @@ installation pins its archive; this checkout contains only company dependencies.
 
 See [supported workflows](USE_CASES.md), [contributing](../../CONTRIBUTING.md) and the
 [license](../../LICENSE).
+
+Jett is the default interactive role; supply `--cwd` for native tools.
+Use `npm run chat -- helper --demo` for the existing scripted demonstration.
+Jett can message Development and delegate optional private workers.

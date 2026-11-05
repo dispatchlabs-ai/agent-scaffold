@@ -1,2 +1,3 @@
-# Agents to run on a schedule. Manual chat selects its agent on the command line.
+defaultAgent: jett
+# Agents to run on a schedule. Manual chat uses defaultAgent unless an explicit agent is selected.
 agents: []

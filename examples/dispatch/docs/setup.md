@@ -71,10 +71,10 @@ storage is unavailable, select one of those explicit alternatives.
 The helper selects `anthropic / claude-sonnet-4-6` in `agents/helper/agent.md`.
 `src/models.ts` also registers the Pi OpenAI provider. Configure its credential
 with `npm run auth -- login openai` or a helper.
-To use it, select an OpenAI model ID supported by the installed Pi 1.4.0 catalog in
+To use it, select an OpenAI model ID supported by the installed Pi 1.5.0 catalog in
 `agent.md` and set a thinking level supported by that model. Provider access and
 billing are yours. Other providers can be registered in `src/models.ts` through
-[Pi's provider API](https://github.com/earendil-works/pi/tree/v1.4.0/packages/ai).
+[Pi's provider API](https://github.com/earendil-works/pi/tree/v1.5.0/packages/ai).
 
 ```sh
 npm run chat -- helper
@@ -123,3 +123,13 @@ For an agent following this guide: complete the credential-free workflow first,
 show its result, then configure a provider only if the user also requested live
 chat. Use their approved local secret mechanism for credentials. Report missing
 access accurately; do not invent a model response or claim the demo is live inference.
+
+## Jett and Development
+
+Omitting the agent selects Jett. Configure the OpenAI credential first, then run
+`npm run chat -- --cwd /path/to/your/repository`. Jett can work directly, delegate
+private assignments, or message Development for implementation and review. The
+selected directory is the native tool environment; follow its repository policy.
+Optional workers require their declared provider/model to be registered and
+authorized in the parent installation. Existing helper conversations remain
+available by selecting `helper` explicitly.

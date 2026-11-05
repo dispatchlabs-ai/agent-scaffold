@@ -11,9 +11,9 @@ Create a parent installation, then place the real company checkout beneath it:
 mkdir agent-workspace
 cd agent-workspace
 npm init -y
-# Build the public source snapshot with native calendars, independent messages and owned clones.
+# Build the public source snapshot with Jett defaults, native calendars, independent messages and owned clones.
 git clone --filter=blob:none https://github.com/dispatchlabs-ai/dispatch.git runtime-source
-git -C runtime-source checkout b23d8e77c903065c7109e8798d8492fe5a7c7f88
+git -C runtime-source checkout 5fe01d39cb21a048a88ef9a99a68c8fb8e01647a
 npm ci --prefix runtime-source --workspace @dispatch/runner
 npm run build --prefix runtime-source --workspace @dispatch/runner
 npm pack ./runtime-source/packages/runner
@@ -34,7 +34,7 @@ its business and development dependencies. Node and TypeScript find shared
 packages in the parent's `node_modules`; no custom module loader is used.
 A symlink to a checkout elsewhere does not change its real ancestor directories.
 
-The current installation uses Pi Durable, Pi AI and Chord 1.4.0. Native Pi imports
+The current installation uses Pi Durable, Pi AI and Chord 1.5.0. Native Pi imports
 in company tools and documents remain valid; their implementation and version
 come from the host. Update the installation once, then verify every definition
 and affected domain workflow against it. Run `npm ls` at the installation root

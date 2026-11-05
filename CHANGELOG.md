@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-05
+
+- Add generic Jett as the default for new conversations, with request completion, optional workers and the current feature-delivery workflow. Preserve existing agent identities and histories.
+
 ## Native agent calendars — October 27, 2026
 
 - Replace the scheduling proposal with agent-owned Runner calendars, using an

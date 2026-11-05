@@ -1,5 +1,9 @@
 # Agent Scaffold
 
+[Jett](docs/jett.md) is the default for new conversations. His generic instructions,
+request completion and optional workers use the current Development workflow.
+Existing agents and histories remain available.
+
 A directory structure for your company's agents, shared skills and supporting
 code. Copy it, adapt the Markdown examples and choose your own runtime when you
 need one. The default scaffold has no dependencies or installation step.

@@ -1,3 +1,4 @@
+defaultAgent: jett
 # Company directory, not a runtime or permission configuration.
 # Set the actual company wiki before registering projects; keep secrets outside Git.
 name: example-company

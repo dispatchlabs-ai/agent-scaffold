@@ -3,7 +3,7 @@ import { readFile, realpath } from "node:fs/promises";
 import { resolve } from "node:path";
 import { parseArgs } from "node:util";
 import { fileURLToPath } from "node:url";
-import { catalog, chatInTerminal, loadAgent, CredentialError, promptForSecret, type UserCredentials } from "@dispatch/runner";
+import { catalog, defaultAgent, chatInTerminal, loadAgent, CredentialError, promptForSecret, type UserCredentials } from "@dispatch/runner";
 import { demoModels, liveModels, userCredentials } from "./models.ts";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -20,7 +20,7 @@ try {
   } });
   if (values.credentials && !["session", "environment"].includes(values.credentials)) throw new Error("--credentials accepts session or environment.");
   if (positionals.length > 1) throw new Error("Supply one agent name. Use --prompt for a one-shot message.");
-  const name = positionals[0] ?? "helper";
+  const name = positionals[0] ?? await defaultAgent(root);
   if (values.help) {
     console.log("Usage: npm run chat -- [agent] [--demo | --prompt TEXT | --prompt-file PATH]\nOptions: --list, --skills, --cwd PATH, --session NAME, --new, --history, --state-dir PATH, --update-definitions\nForeman continues by default. --once runs a single pass; --continuous follows a continuous agent's loop.\nCredentials: npm run auth -- help; --credentials session or --credentials environment\nInteractive commands: /new, /history, /quit");
   } else if (values.list) {
@@ -30,13 +30,18 @@ try {
     if (values.skills) {
       for (const skill of agent.skillCatalog ?? []) console.log(`${skill.id}\t${skill.revision.slice(0, 12)}\t${skill.description}`);
     } else {
-      if (agent.messages?.length)
-        throw new Error("Messaging definitions need a shared service. Use npm run sequence for author/reviewer; see docs/independent-agents.md.");
+      const names = new Set<string>();
+      const include = async (id: string) => {
+        if (names.has(id)) return;
+        names.add(id);
+        for (const recipient of (await loadAgent(root, id)).messages ?? []) await include(recipient);
+      };
+      await include(name);
       if (values.prompt && values["prompt-file"]) throw new Error("Choose --prompt or --prompt-file.");
       if (values.once && values.continuous) throw new Error("Choose --once or --continuous.");
       const continuous = !values.history && !values.once && (values.continuous || name === "foreman");
       if (continuous && agent.trigger.mode !== "continuous") throw new Error("Continuous work requires a continuous agent definition.");
-      if (["foreman", "worker", "lander"].includes(name) && !values.cwd) throw new Error("Supply --cwd PATH for the repository to work on. See docs/foreman.md.");
+      if (["foreman", "worker", "lander", "jett", "development"].includes(name) && !values.cwd) throw new Error("Supply --cwd PATH for the repository to work on. See docs/foreman.md.");
       const cwd = values.cwd ? await realpath(resolve(values.cwd)) : undefined;
       const workspace = cwd ? createHash("sha256").update(cwd).digest("hex").slice(0, 16) : undefined;
       if (values.demo && (name !== "helper" || values.prompt || values["prompt-file"])) throw new Error("The scripted demo runs helper with assets/sample-changes.md. Omit --demo for your own prompts.");
@@ -56,7 +61,7 @@ try {
       }
       const prompt = values.demo ? await readFile(resolve(root, "assets/sample-changes.md"), "utf8")
         : values["prompt-file"] ? await readFile(resolve(values["prompt-file"]), "utf8") : values.prompt;
-      const options = { root, models, agent: name, demo: values.demo, cwd,
+      const options = { root, models, agent: name, names: [...names], drain: true, demo: values.demo, cwd,
         stateRoot: resolve(values["state-dir"] ?? resolve(root, ".state", values.demo ? "demo" : "live", ...(workspace ? [workspace] : []))),
         session: values.session, newChat: values.new, history: values.history, prompt,
         updateDefinitions: values["update-definitions"], continuous,
