@@ -1,5 +1,15 @@
 # Make the structure your own
 
+## Definitions and delivery channels
+
+Agent definitions are independent of delivery channels. Keep role instructions,
+model choices, native tools and workflow behavior independent of transport. The
+optional Dispatch example must also run through the shared Dispatch CLI. Channel
+routing, authenticated identities, conversation scope,
+formatting and delivery belong in host adapters or channel-specific skills.
+The same definition can be exposed through Slack, Google Chat, email or another
+channel when the installation supplies that adapter and its capabilities.
+
 Start with `agents/helper/agent.md`. It describes the agent's purpose, instructions
 and related skills in ordinary Markdown. Give each agent its own folder and use
 clear names, such as `release-helper` or `researcher`.
