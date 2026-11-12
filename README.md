@@ -1,3 +1,5 @@
+> **Archived November 2026.** This starter is replaced by the kit in [Dispatch](https://github.com/dispatchlabs-ai/dispatch/tree/main/packages/kit): starter agents and skills that a company's agent repository composes into its release. This repository is read-only and no longer maintained.
+
 # Agent Scaffold
 
 [Jett](docs/jett.md) is the default for new conversations. His generic instructions,
